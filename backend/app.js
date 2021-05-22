@@ -69,7 +69,8 @@ class App {
   }
 
   generateInvoice() {
-
+    const win = new electron.BrowserWindow();
+    win.loadFile('index.html');
   }
 
   resetWork() {
