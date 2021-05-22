@@ -6,6 +6,13 @@ var writeFileAtomic = require('write-file-atomic');
 const datadir = electron.app.getPath('userData');
 const filepath = path.join(datadir, 'data.json');
 
+/**
+ * @type {{
+ *   running: boolean,
+ *   currentTaskIndex: number,
+ *   tasks: [string, number][],
+ * }}
+ */
 module.exports.data = {};
 
 if (fs.existsSync(filepath)) {
