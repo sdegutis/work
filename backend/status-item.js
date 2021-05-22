@@ -15,18 +15,19 @@ class StatusItem {
 
   /**
    * @param {string} appName
-   * @param {number} timeMs
+   * @param {number} timeSec
    */
-  setTitle(appName, timeMs) {
-    const totalSec = Math.floor(timeMs / 1000);
-    const totalMin = Math.floor(totalSec / 60);
+  setTitle(appName, timeSec) {
+    const totalMin = Math.floor(timeSec / 60);
 
+    const relSec = timeSec % 60;
     const relMin = totalMin % 60;
     const relHour = Math.floor(totalMin / 60);
 
+    const strSec = relSec.toFixed().padStart(2, '0');
     const strMin = relMin.toFixed().padStart(2, '0');
     const strHour = relHour.toFixed().padStart(2, '0');
-    const timeStr = `${strHour}:${strMin}`;
+    const timeStr = `${strHour}:${strMin}:${strSec}`;
 
     const color = this.running ? RED : YELLOW;
     const title = `${color}(${appName}) [${timeStr}]${RESET}`;
