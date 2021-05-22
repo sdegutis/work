@@ -10,7 +10,7 @@ class StatusItem {
   constructor() {
     this.tray = new electron.Tray(electron.nativeImage.createEmpty());
     this.running = false;
-    this.lastSet = null;
+    this.lastSet = '';
   }
 
   /**
