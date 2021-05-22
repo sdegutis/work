@@ -1,6 +1,7 @@
 const electron = require('electron');
 const path = require('path');
 const fs = require('fs');
+var writeFileAtomic = require('write-file-atomic');
 
 const datadir = electron.app.getPath('userData');
 const filepath = path.join(datadir, 'data.json');
@@ -13,7 +14,7 @@ if (fs.existsSync(filepath)) {
 }
 
 function saveImmediately() {
-  fs.writeFileSync(filepath, JSON.stringify(module.exports.data, null, 2));
+  writeFileAtomic(filepath, JSON.stringify(module.exports.data, null, 2));
   console.log('saved data');
 }
 
