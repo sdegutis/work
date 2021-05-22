@@ -36,3 +36,5 @@ module.exports.saveImmediately = saveImmediately;
 
 setInterval(saveSoon, 1000 * 30);
 saveImmediately();
+
+electron.app.on('quit', saveImmediately);
