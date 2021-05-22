@@ -13,11 +13,17 @@ const filepath = path.join(datadir, 'data.json');
  *   tasks: [string, number][],
  * }}
  */
-module.exports.data = {};
+module.exports.data = readData() || {
+  running: false,
+  currentTaskIndex: -1,
+  tasks: [],
+};
 
-if (fs.existsSync(filepath)) {
-  const content = fs.readFileSync(filepath, 'utf8');
-  module.exports.data = JSON.parse(content);
+function readData() {
+  if (fs.existsSync(filepath)) {
+    const content = fs.readFileSync(filepath, 'utf8');
+    return JSON.parse(content);
+  }
 }
 
 function saveImmediately() {
@@ -25,9 +31,10 @@ function saveImmediately() {
   console.log('saved data');
 }
 
+/** @type {NodeJS.Timeout | undefined} */
 let saveTimeout;
 function saveSoon() {
-  clearTimeout(saveTimeout);
+  if (saveTimeout) clearTimeout(saveTimeout);
   saveTimeout = setTimeout(saveImmediately, 1000);
 }
 
