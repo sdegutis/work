@@ -23,8 +23,6 @@ class StatusItem {
     const relMin = totalMin % 60;
     const relHour = Math.floor(totalMin / 60);
 
-    console.log({ relMin, relHour })
-
     const strMin = relMin.toFixed().padStart(2, '0');
     const strHour = relHour.toFixed().padStart(2, '0');
     const timeStr = `${strHour}:${strMin}`;
