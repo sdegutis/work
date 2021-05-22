@@ -10,6 +10,7 @@ class StatusItem {
   constructor() {
     this.tray = new electron.Tray(electron.nativeImage.createEmpty());
     this.running = false;
+    this.lastSet = null;
   }
 
   /**
@@ -28,9 +29,12 @@ class StatusItem {
     const timeStr = `${strHour}:${strMin}`;
 
     const color = this.running ? RED : YELLOW;
-    this.tray.setTitle(`${color}(${appName}) [${timeStr}]${RESET}`, {
-      fontType: 'monospacedDigit',
-    });
+    const title = `${color}(${appName}) [${timeStr}]${RESET}`;
+
+    if (this.lastSet !== title) {
+      this.lastSet = title;
+      this.tray.setTitle(title, { fontType: 'monospacedDigit' });
+    }
   }
 
 }
