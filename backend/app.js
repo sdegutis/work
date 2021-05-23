@@ -14,9 +14,9 @@ class App {
         running: false,
         currentTaskIndex: 0,
         tasks: [
-          ['stuff', 0],
-          ['Some things', 2],
-          ['Whatever!', 60 * 60 * 2.25],
+          { name: 'stuff', seconds: 0 },
+          { name: 'Some things', seconds: 2 },
+          { name: 'Whatever!', seconds: 60 * 60 * 2.25 },
         ],
       };
     }
@@ -30,8 +30,8 @@ class App {
   }
 
   updateStatusItemText() {
-    const [app, time] = store.data.tasks[store.data.currentTaskIndex];
-    this.statusItem.setTitle(app, time);
+    const { name, seconds } = store.data.tasks[store.data.currentTaskIndex];
+    this.statusItem.setTitle(name, seconds);
   }
 
   rebuildMenu() {
@@ -43,7 +43,7 @@ class App {
 
       { type: 'separator' },
 
-      ...store.data.tasks.map(([task,], i) => {
+      ...store.data.tasks.map(({ name: task }, i) => {
         const current = store.data.currentTaskIndex === i;
         return /** @type {electron.MenuItemConstructorOptions} */ ({
           label: task,
@@ -104,7 +104,7 @@ class App {
 
   tick() {
     const app = store.data.tasks[store.data.currentTaskIndex];
-    app[1]++;
+    app.seconds++;
     this.updateStatusItemText();
   }
 

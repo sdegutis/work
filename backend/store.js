@@ -10,7 +10,7 @@ const filepath = path.join(datadir, 'data.json');
  * @type {{
  *   running: boolean,
  *   currentTaskIndex: number,
- *   tasks: [string, number][],
+ *   tasks: { name: string, seconds: number }[],
  * }}
  */
 module.exports.data = readData() || {
