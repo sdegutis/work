@@ -56,13 +56,33 @@ class App {
   }
 
   manageTasks() {
-    const win = new electron.BrowserWindow();
-    win.loadFile('frontend/manage.html');
+    if (this.manageTasksWin) {
+      electron.app.focus({ steal: true });
+      this.manageTasksWin.focus();
+    }
+    else {
+      this.manageTasksWin = new electron.BrowserWindow();
+      this.manageTasksWin.loadFile('frontend/manage.html');
+
+      this.manageTasksWin.on('closed', () => {
+        delete this.manageTasksWin;
+      });
+    }
   }
 
   generateInvoice() {
-    const win = new electron.BrowserWindow();
-    win.loadFile('frontend/invoice.html');
+    if (this.invoiceWin) {
+      electron.app.focus({ steal: true });
+      this.invoiceWin.focus();
+    }
+    else {
+      this.invoiceWin = new electron.BrowserWindow();
+      this.invoiceWin.loadFile('frontend/invoice.html');
+
+      this.invoiceWin.on('closed', () => {
+        delete this.invoiceWin;
+      });
+    }
   }
 
   resetWork() {
