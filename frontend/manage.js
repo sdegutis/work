@@ -33,6 +33,7 @@ function addTaskItem(name) {
         li.innerText = name;
       }
     };
+    input.onblur = () => li.innerText = name;
 
     li.innerHTML = '';
     li.append(input);
@@ -65,6 +66,7 @@ main.ready((data) => {
         li.remove();
       }
     };
+    input.onblur = () => li.remove();
 
     li.append(input);
     input.focus();
