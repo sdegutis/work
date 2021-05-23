@@ -27,7 +27,7 @@ function readData() {
 }
 
 function saveImmediately() {
-  writeFileAtomic(filepath, JSON.stringify(module.exports.data, null, 2));
+  writeFileAtomic.sync(filepath, JSON.stringify(module.exports.data, null, 2));
   console.log('saved data');
 }
 
