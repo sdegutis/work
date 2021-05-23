@@ -95,8 +95,8 @@ class App {
   }
 
   tick() {
-    const app = store.data.tasks[store.data.currentTaskIndex];
-    app.seconds++;
+    const task = store.data.tasks[store.data.currentTaskIndex];
+    task.seconds++;
     this.updateStatusItemText();
   }
 

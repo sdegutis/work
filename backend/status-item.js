@@ -14,10 +14,10 @@ class StatusItem {
   }
 
   /**
-   * @param {string} appName
+   * @param {string} taskName
    * @param {number} timeSec
    */
-  setTitle(appName, timeSec) {
+  setTitle(taskName, timeSec) {
     const totalMin = Math.floor(timeSec / 60);
 
     const relSec = timeSec % 60;
@@ -30,7 +30,7 @@ class StatusItem {
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
     const color = this.running ? RED : YELLOW;
-    const title = `${color}(${appName}) [${timeStr}]${RESET}`;
+    const title = `${color}(${taskName}) [${timeStr}]${RESET}`;
 
     if (this.lastSet !== title) {
       this.lastSet = title;
