@@ -1,11 +1,7 @@
 const tasksEl = document.getElementById('tasks');
 const addLink = document.getElementById('add');
 
-let taskCount = 0;
-
 function addTaskItem(name) {
-  taskCount++;
-
   const li = document.createElement('li');
   li.innerText = name;
   addLink.insertAdjacentElement('beforebegin', li);
