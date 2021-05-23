@@ -61,12 +61,12 @@ class App {
       this.manageTasksWin.focus();
     }
     else {
-      this.manageTasksWin = new electron.BrowserWindow();
-      this.manageTasksWin.loadFile('frontend/manage.html');
+      const win = new electron.BrowserWindow();
 
-      this.manageTasksWin.on('closed', () => {
-        delete this.manageTasksWin;
-      });
+      this.manageTasksWin = win;
+      win.on('closed', () => delete this.manageTasksWin);
+
+      win.loadFile('frontend/manage.html');
     }
   }
 
@@ -76,12 +76,12 @@ class App {
       this.invoiceWin.focus();
     }
     else {
-      this.invoiceWin = new electron.BrowserWindow();
-      this.invoiceWin.loadFile('frontend/invoice.html');
+      const win = new electron.BrowserWindow();
 
-      this.invoiceWin.on('closed', () => {
-        delete this.invoiceWin;
-      });
+      this.invoiceWin = win;
+      win.on('closed', () => delete this.invoiceWin);
+
+      win.loadFile('frontend/invoice.html');
     }
   }
 
