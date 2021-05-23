@@ -1,6 +1,6 @@
 const electron = require('electron');
 const StatusItem = require('./status-item');
-const store = require('./store');
+const db = require('./db');
 const path = require('path');
 
 class App {
@@ -11,27 +11,27 @@ class App {
     this.rebuildMenu();
     this.updateStatusItemText();
 
-    if (store.data.running) {
+    if (db.data.running) {
       this.resume();
     }
   }
 
   updateStatusItemText() {
-    const { name, seconds } = store.data.tasks[store.data.currentTaskIndex];
+    const { name, seconds } = db.data.tasks[db.data.currentTaskIndex];
     this.statusItem.setTitle(name, seconds);
   }
 
   rebuildMenu() {
     const menu = electron.Menu.buildFromTemplate([
 
-      store.data.running
+      db.data.running
         ? { label: 'Pause', click: this.pause.bind(this) }
         : { label: 'Resume', click: this.resume.bind(this) },
 
       { type: 'separator' },
 
-      ...store.data.tasks.map(({ name: task }, i) => {
-        const current = store.data.currentTaskIndex === i;
+      ...db.data.tasks.map(({ name: task }, i) => {
+        const current = db.data.currentTaskIndex === i;
         return /** @type {electron.MenuItemConstructorOptions} */ ({
           label: task,
           type: 'radio',
@@ -74,7 +74,7 @@ class App {
       win.loadFile('frontend/manage.html');
 
       win.on('ready-to-show', () => {
-        win.webContents.send('setup', store.data);
+        win.webContents.send('setup', db.data);
       });
     }
   }
@@ -102,14 +102,14 @@ class App {
    * @param {number} taskIndex
    */
   chooseTask(taskIndex) {
-    store.data.currentTaskIndex = taskIndex;
+    db.data.currentTaskIndex = taskIndex;
     this.updateStatusItemText();
     this.rebuildMenu();
-    store.save();
+    db.save();
   }
 
   pause() {
-    store.data.running = false;
+    db.data.running = false;
     this.rebuildMenu();
 
     if (this.timer) {
@@ -118,14 +118,14 @@ class App {
   }
 
   resume() {
-    store.data.running = true;
+    db.data.running = true;
     this.rebuildMenu();
 
     this.timer = setInterval(this.tick.bind(this), 1000);
   }
 
   tick() {
-    const task = store.data.tasks[store.data.currentTaskIndex];
+    const task = db.data.tasks[db.data.currentTaskIndex];
     task.seconds++;
     this.updateStatusItemText();
   }
