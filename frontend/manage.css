@@ -25,3 +25,15 @@ ul {
 a {
   color: #2af;
 }
+
+input {
+  border: none;
+  outline: 1px solid #777;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+input:focus {
+  outline: 1px solid #2af;
+}
