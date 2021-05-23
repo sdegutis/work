@@ -96,6 +96,7 @@ class App {
     store.data.currentTaskIndex = taskIndex;
     this.updateStatusItemText();
     this.rebuildMenu();
+    store.save();
   }
 
   pause() {
