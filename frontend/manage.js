@@ -4,7 +4,6 @@ main.ready((data) => {
   data.tasks.forEach(({ name }, i) => {
     const li = document.createElement('li');
     li.innerText = name;
-    li.className = i;
     tasksEl.append(li);
 
     li.ondblclick = () => {
@@ -14,7 +13,6 @@ main.ready((data) => {
       input.onkeydown = (e) => {
         if (e.keyCode === 13) {
           name = input.value.trim();
-          console.log('using value', [name]);
           main.rename(i, name);
           li.innerText = name;
         }
