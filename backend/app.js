@@ -138,6 +138,7 @@ class App {
   pause() {
     db.data.running = false;
     this.rebuildMenu();
+    this.updateStatusItemText();
 
     if (this.timer) {
       clearInterval(this.timer);
@@ -147,6 +148,7 @@ class App {
   resume() {
     db.data.running = true;
     this.rebuildMenu();
+    this.updateStatusItemText();
 
     this.timer = setInterval(this.tick.bind(this), 1000);
   }

@@ -30,7 +30,8 @@ class StatusItem {
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
     const color = db.data.running ? RED : YELLOW;
-    const title = `${color}(${taskName}) [${timeStr}]${RESET}`;
+    const running = db.data.running ? '+' : '-';
+    const title = `${running} ${color}(${taskName}) [${timeStr}]${RESET}`;
 
     if (this.lastSet !== title) {
       this.lastSet = title;
