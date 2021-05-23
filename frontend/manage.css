@@ -1,0 +1,23 @@
+html {
+  background: #222;
+  color: #ddd;
+  font-family: BlinkMacSystemFont;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style-type: none;
+}
+
+h1 {
+  margin: 1rem;
+}
+
+ul {
+  margin: 1rem;
+}
