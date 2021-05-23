@@ -99,7 +99,6 @@ class App {
           const [i] = data;
           db.data.tasks.splice(i, 1);
           db.save();
-          console.log(db.data);
           this.rebuildMenu();
           this.updateStatusItemText();
         }
