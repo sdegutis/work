@@ -18,15 +18,21 @@ function addTaskItem(name) {
 
     input.onkeydown = (e) => {
       if (e.key === 'Enter') {
-        name = input.value.trim();
+        const newName = input.value.trim();
 
-        if (name) {
+        if (newName) {
+          name = newName;
           main.rename(index, name);
           li.innerText = name;
         }
         else {
-          main.delete(index);
-          li.remove();
+          if (confirm(`Are you sure you want to delete the task "${name}"?`)) {
+            main.delete(index);
+            li.remove();
+          }
+          else {
+            li.innerText = name;
+          }
         }
       }
       else if (e.key === 'Escape') {
