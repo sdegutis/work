@@ -2,24 +2,10 @@ const electron = require('electron');
 const StatusItem = require('./status-item');
 const store = require('./store');
 
-const DEBUG = true;
-
 class App {
 
   constructor() {
     this.statusItem = new StatusItem();
-
-    if (DEBUG) {
-      store.data = {
-        running: false,
-        currentTaskIndex: 0,
-        tasks: [
-          { name: 'stuff', seconds: 0 },
-          { name: 'Some things', seconds: 2 },
-          { name: 'Whatever!', seconds: 60 * 60 * 2.25 },
-        ],
-      };
-    }
 
     this.rebuildMenu();
     this.updateStatusItemText();
