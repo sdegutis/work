@@ -61,10 +61,13 @@ main.ready((data) => {
         const name = input.value.trim();
         main.create(name);
 
+        input.onblur = null;
         li.remove();
+
         addTaskItem(name);
       }
       else if (e.key === 'Escape') {
+        input.onblur = null;
         li.remove();
       }
     };
