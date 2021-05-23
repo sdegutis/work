@@ -11,7 +11,7 @@ main.ready((data) => {
       input.value = name;
 
       input.onkeydown = (e) => {
-        if (e.keyCode === 13) {
+        if (e.key === 'Enter') {
           name = input.value.trim();
           main.rename(i, name);
           li.innerText = name;
