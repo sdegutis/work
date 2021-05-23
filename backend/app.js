@@ -121,7 +121,7 @@ class App {
     store.data.running = true;
     this.rebuildMenu();
 
-    this.timer = setInterval(this.tick.bind(this), 10);
+    this.timer = setInterval(this.tick.bind(this), 1000);
   }
 
   tick() {
