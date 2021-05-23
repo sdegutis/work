@@ -65,6 +65,7 @@ class App {
       const win = new electron.BrowserWindow({
         width: 300,
         height: 300,
+        backgroundColor: '#222',
         webPreferences: {
           preload: path.join(__dirname, '../frontend/manage-preload.js'),
         }
