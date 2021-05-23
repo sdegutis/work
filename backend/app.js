@@ -57,6 +57,7 @@ class App {
 
       { type: 'separator' },
 
+      { label: 'Manage Tasks', click: this.manageTasks.bind(this) },
       { label: 'Generate Invoice', click: this.generateInvoice.bind(this) },
       { label: 'Reset Work', click: this.resetWork.bind(this) },
 
@@ -68,9 +69,14 @@ class App {
     this.statusItem.tray.setContextMenu(this.menu);
   }
 
+  manageTasks() {
+    const win = new electron.BrowserWindow();
+    win.loadFile('frontend/manage.html');
+  }
+
   generateInvoice() {
     const win = new electron.BrowserWindow();
-    win.loadFile('index.html');
+    win.loadFile('frontend/invoice.html');
   }
 
   resetWork() {
