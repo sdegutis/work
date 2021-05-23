@@ -87,6 +87,13 @@ class App {
           this.rebuildMenu();
           this.updateStatusItemText();
         }
+        else if (channel === 'create') {
+          const [name] = data;
+          db.data.tasks.push({ name, seconds: 0 });
+          db.save();
+          this.rebuildMenu();
+          this.updateStatusItemText();
+        }
       });
     }
   }
