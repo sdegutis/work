@@ -22,7 +22,7 @@ class App {
   }
 
   rebuildMenu() {
-    this.menu = electron.Menu.buildFromTemplate([
+    const menu = electron.Menu.buildFromTemplate([
 
       store.data.running
         ? { label: 'Pause', click: this.pause.bind(this) }
@@ -53,7 +53,7 @@ class App {
       { role: 'quit' },
     ]);
 
-    this.statusItem.tray.setContextMenu(this.menu);
+    this.statusItem.tray.setContextMenu(menu);
   }
 
   manageTasks() {
