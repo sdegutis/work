@@ -5,6 +5,7 @@ const electron = require('electron');
 let ready;
 electron.contextBridge.exposeInMainWorld('main', {
   ready(fn) { ready = fn },
+  rename(i, newName) { electron.ipcRenderer.send('rename', i, newName) },
 });
 
 electron.ipcRenderer.on('setup', (e, data) => ready(data));

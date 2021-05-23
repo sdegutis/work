@@ -78,6 +78,16 @@ class App {
       win.on('ready-to-show', () => {
         win.webContents.send('setup', db.data);
       });
+
+      win.webContents.on('ipc-message', (event, channel, ...data) => {
+        if (channel === 'rename') {
+          const [i, name] = data;
+          db.data.tasks[i].name = name;
+          db.save();
+          this.rebuildMenu();
+          this.updateStatusItemText();
+        }
+      });
     }
   }
 
