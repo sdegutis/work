@@ -19,7 +19,7 @@ function addTaskItem(name) {
         if (newName) {
           name = newName;
           main.rename(index, name);
-          li.innerText = name;
+          input.blur();
         }
         else {
           if (confirm(`Are you sure you want to delete the task "${name}"?`)) {
@@ -27,12 +27,12 @@ function addTaskItem(name) {
             li.remove();
           }
           else {
-            li.innerText = name;
+            input.blur();
           }
         }
       }
       else if (e.key === 'Escape') {
-        li.innerText = name;
+        input.blur();
       }
     };
     input.onblur = () => li.innerText = name;
