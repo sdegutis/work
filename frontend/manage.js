@@ -20,6 +20,9 @@ function addTaskItem(name, i) {
         main.rename(i, name);
         li.innerText = name;
       }
+      else if (e.key === 'Escape') {
+        li.innerText = name;
+      }
     };
 
     li.innerHTML = '';
@@ -47,6 +50,9 @@ main.ready((data) => {
 
         li.remove();
         addTaskItem(name, taskCount);
+      }
+      else if (e.key === 'Escape') {
+        li.remove();
       }
     };
 
