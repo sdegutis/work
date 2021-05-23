@@ -1,4 +1,5 @@
 const electron = require('electron');
+const db = require('./db');
 
 const RED = '\033[31;1m';
 const YELLOW = '\033[33;1m';
@@ -9,7 +10,6 @@ class StatusItem {
 
   constructor() {
     this.tray = new electron.Tray(electron.nativeImage.createEmpty());
-    this.running = false;
     this.lastSet = '';
   }
 
@@ -29,7 +29,7 @@ class StatusItem {
     const strHour = relHour.toFixed().padStart(2, '0');
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
-    const color = this.running ? RED : YELLOW;
+    const color = db.data.running ? RED : YELLOW;
     const title = `${color}(${taskName}) [${timeStr}]${RESET}`;
 
     if (this.lastSet !== title) {
