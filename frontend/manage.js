@@ -3,7 +3,7 @@ const addLink = document.getElementById('add');
 
 let taskCount = 0;
 
-function addTaskItem(name, i) {
+function addTaskItem(name) {
   taskCount++;
 
   const li = document.createElement('li');
@@ -11,14 +11,23 @@ function addTaskItem(name, i) {
   addLink.insertAdjacentElement('beforebegin', li);
 
   li.ondblclick = () => {
+    const index = [...li.parentElement.children].indexOf(li);
+
     const input = document.createElement('input');
     input.value = name;
 
     input.onkeydown = (e) => {
       if (e.key === 'Enter') {
         name = input.value.trim();
-        main.rename(i, name);
-        li.innerText = name;
+
+        if (name) {
+          main.rename(index, name);
+          li.innerText = name;
+        }
+        else {
+          main.delete(index);
+          li.remove();
+        }
       }
       else if (e.key === 'Escape') {
         li.innerText = name;
@@ -33,8 +42,8 @@ function addTaskItem(name, i) {
 }
 
 main.ready((data) => {
-  data.tasks.forEach(({ name }, i) => {
-    addTaskItem(name, i);
+  data.tasks.forEach(({ name }) => {
+    addTaskItem(name);
   });
 
   addLink.onclick = (e) => {
@@ -50,7 +59,7 @@ main.ready((data) => {
         main.create(name);
 
         li.remove();
-        addTaskItem(name, taskCount);
+        addTaskItem(name);
       }
       else if (e.key === 'Escape') {
         li.remove();

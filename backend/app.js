@@ -94,6 +94,14 @@ class App {
           this.rebuildMenu();
           this.updateStatusItemText();
         }
+        else if (channel === 'delete') {
+          const [i] = data;
+          db.data.tasks.splice(i, 1);
+          db.save();
+          console.log(db.data);
+          this.rebuildMenu();
+          this.updateStatusItemText();
+        }
       });
     }
   }
