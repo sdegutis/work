@@ -28,6 +28,7 @@ function addTaskItem(name, i) {
     li.innerHTML = '';
     li.append(input);
     input.focus();
+    input.select();
   };
 }
 
