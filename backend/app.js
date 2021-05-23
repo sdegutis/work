@@ -1,6 +1,7 @@
 const electron = require('electron');
 const StatusItem = require('./status-item');
 const store = require('./store');
+const path = require('path');
 
 class App {
 
@@ -61,12 +62,20 @@ class App {
       this.manageTasksWin.focus();
     }
     else {
-      const win = new electron.BrowserWindow();
+      const win = new electron.BrowserWindow({
+        webPreferences: {
+          preload: path.join(__dirname, '../frontend/manage-preload.js'),
+        }
+      });
 
       this.manageTasksWin = win;
       win.on('closed', () => delete this.manageTasksWin);
 
       win.loadFile('frontend/manage.html');
+
+      win.on('ready-to-show', () => {
+        win.webContents.send('setup', store.data);
+      });
     }
   }
 
