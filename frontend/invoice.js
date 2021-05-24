@@ -24,6 +24,8 @@ main.ready((data) => {
   generateButton.onclick = (e) => {
     e.preventDefault();
 
-    previewEl.innerHTML = main.transform(editorEl.value, data);
+    main.transform(editorEl.value).then(html => {
+      previewEl.innerHTML = html;
+    });
   };
 });

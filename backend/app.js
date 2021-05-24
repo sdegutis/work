@@ -14,6 +14,10 @@ class App {
     if (db.data.running) {
       this.resume();
     }
+
+    electron.ipcMain.handle('get-data', (e) => {
+      return db.data;
+    });
   }
 
   updateStatusItemText() {

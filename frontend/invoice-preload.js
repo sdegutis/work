@@ -7,7 +7,9 @@ electron.contextBridge.exposeInMainWorld('main', {
   set(key, val) {
     electron.ipcRenderer.send('set', key, val);
   },
-  transform: (text, data) => {
+  transform: async (text) => {
+    const data = await electron.ipcRenderer.invoke('get-data');
+
     const lines = data.tasks.map(({ name, seconds }) => {
       const hours = seconds / 60 / 60;
       const time = roundToNearest15Mins(hours);
