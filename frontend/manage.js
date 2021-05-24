@@ -3,13 +3,21 @@ const addLink = document.getElementById('add');
 
 function addTaskItem(name) {
   const li = document.createElement('li');
-  li.innerText = name;
+  const showName = () => {
+    const span = document.createElement('span');
+    span.innerText = name;
+    span.className = 'item';
+    li.innerHTML = '';
+    li.append(span);
+  };
+  showName();
   addLink.parentElement.insertAdjacentElement('beforebegin', li);
 
   li.ondblclick = () => {
     const index = [...li.parentElement.children].indexOf(li);
 
     const input = document.createElement('input');
+    input.className = 'item';
     input.value = name;
 
     input.onkeydown = (e) => {
@@ -22,7 +30,7 @@ function addTaskItem(name) {
           input.blur();
         }
         else {
-          if (confirm(`Are you sure you want to delete the task "${name}"?`)) {
+          if (confirm(`Delete task "${name}"?`)) {
             main.delete(index);
             li.remove();
           }
@@ -35,7 +43,7 @@ function addTaskItem(name) {
         input.blur();
       }
     };
-    input.onblur = () => li.innerText = name;
+    input.onblur = showName;
 
     li.innerHTML = '';
     li.append(input);
@@ -56,6 +64,8 @@ main.ready((data) => {
     addLink.parentElement.insertAdjacentElement('beforebegin', li);
 
     const input = document.createElement('input');
+    input.className = 'item';
+
     input.onkeydown = (e) => {
       if (e.key === 'Enter') {
         const name = input.value.trim();
