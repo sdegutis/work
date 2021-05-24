@@ -51,4 +51,13 @@ const humanize = (time) => {
   return `${hours}h ${mins / 100 * 60}m`;
 };
 
-Handlebars.registerHelper({ humanize });
+const MONEY_FORMATTER = new Intl.NumberFormat('en-EN', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+const money = (amount) => {
+  return MONEY_FORMATTER.format(amount);
+};
+
+Handlebars.registerHelper({ humanize, money });

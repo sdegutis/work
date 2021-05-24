@@ -22,14 +22,14 @@ const DEFAULT_TEMPLATE = `
 <td>{{name}}</td>
 <td>{{humanize time}}</td>
 <td>{{rate}}</td>
-<td>{{total}}</td>
+<td>{{money total}}</td>
 </tr>
 {{/each}}
 <tr>
 <td></td>
 <td>{{humanize totalHours}}</td>
 <td>Total</td>
-<td>{{totalCharge}}</td>
+<td>{{money totalCharge}}</td>
 </tr>
 </table>
 
