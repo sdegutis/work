@@ -21,35 +21,35 @@ main.refresh(() => {
   previewImmediately();
 });
 
-main.ready((data) => {
-  rateEl.value = data.rate.toFixed();
-  rateEl.oninput = () => {
-    const rate = +rateEl.value;
-    const valid = !isNaN(rate);
-    rateEl.classList.toggle('invalid', !valid);
-    if (valid) {
-      main.set('rate', rate);
-      previewSoon();
-    }
-  };
+const data = await new Promise(main.ready);
 
-  editorEl.value = data.template;
-  editorEl.oninput = () => {
-    main.set('template', editorEl.value);
+rateEl.value = data.rate.toFixed();
+rateEl.oninput = () => {
+  const rate = +rateEl.value;
+  const valid = !isNaN(rate);
+  rateEl.classList.toggle('invalid', !valid);
+  if (valid) {
+    main.set('rate', rate);
     previewSoon();
-  };
+  }
+};
 
-  previewImmediately();
+editorEl.value = data.template;
+editorEl.oninput = () => {
+  main.set('template', editorEl.value);
+  previewSoon();
+};
 
-  window.addEventListener('resize', resizePreview);
-  resizePreview();
+previewImmediately();
 
-  saveButton.onclick = (e) => {
-    e.preventDefault();
+window.addEventListener('resize', resizePreview);
+resizePreview();
 
-    // TODO: save PDF with save dialog
-  };
-});
+saveButton.onclick = (e) => {
+  e.preventDefault();
+
+  // TODO: save PDF with save dialog
+};
 
 function resizePreview() {
   previewEl.width = previewEl.parentElement.clientWidth;
