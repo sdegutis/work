@@ -81,8 +81,8 @@ const PRELUDE = `
 /* PDF */
 @media screen {
   html {
+    zoom: 65%;
     background: #f0f0f0;
-    width: 9.5in;
   }
 
   body {
