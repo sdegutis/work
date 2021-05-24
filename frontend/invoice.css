@@ -35,3 +35,7 @@ body {
   display: grid;
   grid-template-columns: 1fr auto;
 }
+
+#rate.invalid {
+  color: red;
+}

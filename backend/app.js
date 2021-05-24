@@ -129,6 +129,15 @@ class App {
       win.on('ready-to-show', () => {
         win.webContents.send('setup', db.data);
       });
+
+      win.webContents.on('ipc-message', (event, channel, ...data) => {
+        if (channel === 'set') {
+          const [key, val] = data;
+          // @ts-ignore uhhhh no idea
+          db.data[key] = val;
+          db.save();
+        }
+      });
     }
   }
 

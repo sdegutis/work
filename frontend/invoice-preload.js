@@ -4,6 +4,9 @@ const Handlebars = require("handlebars");
 let ready;
 electron.contextBridge.exposeInMainWorld('main', {
   ready(fn) { ready = fn },
+  set(key, val) {
+    electron.ipcRenderer.send('set', key, val);
+  },
   transform: (text, data) => {
     const lines = data.tasks.map(({ name, seconds }) => {
       const hours = seconds / 60 / 60;
