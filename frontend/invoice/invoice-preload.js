@@ -50,3 +50,5 @@ const humanize = (time) => {
   const mins = (+minsStr).toFixed();
   return `${hours}h ${mins / 100 * 60}m`;
 };
+
+Handlebars.registerHelper({ humanize });

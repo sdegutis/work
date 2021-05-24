@@ -20,14 +20,14 @@ const DEFAULT_TEMPLATE = `
 {{#each lines}}
 <tr>
 <td>{{name}}</td>
-<td>{{time}}</td>
+<td>{{humanize time}}</td>
 <td>{{rate}}</td>
 <td>{{total}}</td>
 </tr>
 {{/each}}
 <tr>
 <td></td>
-<td>{{totalHours}}</td>
+<td>{{humanize totalHours}}</td>
 <td>Total</td>
 <td>{{totalCharge}}</td>
 </tr>
