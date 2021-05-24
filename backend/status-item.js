@@ -10,6 +10,7 @@ class StatusItem {
   constructor() {
     this.tray = new electron.Tray(electron.nativeImage.createEmpty());
     this.lastSet = '';
+    this.shouldShowColor = true;
   }
 
   /**
@@ -30,8 +31,9 @@ class StatusItem {
     const strHour = relHour.toFixed().padStart(2, '0');
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
-    const color = db.data.running ? RED : YELLOW;
-    const title = `${BLUE}(${shortTaskName}) ${color}[${timeStr}]`;
+    const timeColor = !this.shouldShowColor ? '' : db.data.running ? RED : YELLOW;
+    const taskColor = !this.shouldShowColor ? '' : BLUE;
+    const title = `${taskColor}(${shortTaskName}) ${timeColor}[${timeStr}]`;
 
     if (this.lastSet !== title) {
       this.lastSet = title;
