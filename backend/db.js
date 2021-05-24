@@ -6,17 +6,42 @@ var writeFileAtomic = require('write-file-atomic');
 const datadir = electron.app.getPath('userData');
 const filepath = path.join(datadir, 'data.json');
 
+const DEFAULT_TEMPLATE = `
+
+<h1>Invoice</h1>
+
+<table>
+{{#each lines}}
+<tr>
+<td>{{name}}</td>
+<td>{{time}}</td>
+<td>{{rate}}</td>
+<td>{{total}}</td>
+</tr>
+{{/each}}
+</table>
+
+<p>Total: {{total}}</p>
+
+<p>Thanks!</p>
+
+`.trim();
+
 /**
  * @type {{
  *   running: boolean,
  *   currentTaskIndex: number,
  *   tasks: { name: string, seconds: number }[],
+ *   template: string,
+ *   rate: number,
  * }}
  */
 module.exports.data = readData() || {
   running: false,
   currentTaskIndex: -1,
   tasks: [],
+  template: DEFAULT_TEMPLATE,
+  rate: 30,
 };
 
 function readData() {
