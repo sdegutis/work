@@ -1,7 +1,7 @@
 const rateEl = document.getElementById('rate');
 const editorEl = document.getElementById('editor');
 const previewEl = /** @type {HTMLIFrameElement} */(document.getElementById('preview'));
-const generateButton = document.getElementById('generate');
+const saveButton = document.getElementById('save');
 
 let previewTimer;
 function previewSoon() {
@@ -44,7 +44,7 @@ main.ready((data) => {
   window.addEventListener('resize', resizePreview);
   resizePreview();
 
-  generateButton.onclick = (e) => {
+  saveButton.onclick = (e) => {
     e.preventDefault();
 
     // TODO: save PDF with save dialog
