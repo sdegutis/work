@@ -137,8 +137,13 @@ class App {
       win.webContents.on('ipc-message', (event, channel, ...data) => {
         if (channel === 'set') {
           const [key, val] = data;
-          // @ts-ignore uhhhh no idea
-          db.data[key] = val;
+
+          if (key === 'rate') {
+            db.data[/** @type {'rate'} */(key)] = val;
+          }
+          else if (key === 'template') {
+            db.data[/** @type {'template'} */(key)] = val;
+          }
           db.save();
         }
       });
