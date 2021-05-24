@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "handlebars": "^4.7.7",
+    "monaco-editor": "^0.24.0",
     "write-file-atomic": "^3.0.3"
   }
 }

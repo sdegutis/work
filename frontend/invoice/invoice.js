@@ -12,7 +12,7 @@ function previewSoon() {
 
 function previewImmediately() {
   previewTimer = undefined;
-  main.transform(editorEl.value).then(html => {
+  main.transform(editor.getValue()).then(html => {
     previewEl.srcdoc = PRELUDE + html;
   });
 }
@@ -22,6 +22,19 @@ main.refresh(() => {
 });
 
 const data = await new Promise(main.ready);
+
+require.config({ paths: { vs: '../../node_modules/monaco-editor/min/vs' } });
+
+const editor = await new Promise(resolve => {
+  require(['vs/editor/editor.main'], function () {
+    const editor = monaco.editor.create(editorEl, {
+      theme: 'vs-dark',
+      value: data.template,
+      language: 'html'
+    });
+    resolve(editor);
+  });
+});
 
 rateEl.value = data.rate.toFixed();
 rateEl.oninput = () => {
@@ -34,11 +47,10 @@ rateEl.oninput = () => {
   }
 };
 
-editorEl.value = data.template;
-editorEl.oninput = () => {
-  main.set('template', editorEl.value);
+editor.getModel().onDidChangeContent(() => {
+  main.set('template', editor.getValue());
   previewSoon();
-};
+});
 
 previewImmediately();
 
