@@ -4,7 +4,7 @@ const addLink = document.getElementById('add');
 function addTaskItem(name) {
   const li = document.createElement('li');
   li.innerText = name;
-  addLink.insertAdjacentElement('beforebegin', li);
+  addLink.parentElement.insertAdjacentElement('beforebegin', li);
 
   li.ondblclick = () => {
     const index = [...li.parentElement.children].indexOf(li);
@@ -53,7 +53,7 @@ main.ready((data) => {
     e.preventDefault();
 
     const li = document.createElement('li');
-    addLink.insertAdjacentElement('beforebegin', li);
+    addLink.parentElement.insertAdjacentElement('beforebegin', li);
 
     const input = document.createElement('input');
     input.onkeydown = (e) => {
