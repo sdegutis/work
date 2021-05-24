@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline' 'self'">
   <title>Work: Invoice</title>
   <link rel="stylesheet" href="invoice.css">
 </head>
@@ -17,7 +17,9 @@
     </div>
     <textarea id="editor"></textarea>
   </div>
-  <div id="right"></div>
+  <div id="right">
+    <iframe id="preview"></iframe>
+  </div>
   <script src="./invoice.js"></script>
 </body>
 

@@ -1,6 +1,6 @@
 const rateEl = document.getElementById('rate');
 const editorEl = document.getElementById('editor');
-const previewEl = document.getElementById('right');
+const previewEl = /** @type {HTMLIFrameElement} */(document.getElementById('preview'));
 const generateButton = document.getElementById('generate');
 
 main.ready((data) => {
@@ -19,11 +19,19 @@ main.ready((data) => {
     main.set('template', editorEl.value);
   };
 
+  window.addEventListener('resize', resizePreview);
+  resizePreview();
+
   generateButton.onclick = (e) => {
     e.preventDefault();
 
     main.transform(editorEl.value).then(html => {
-      previewEl.innerHTML = html;
+      previewEl.srcdoc = html;
     });
   };
 });
+
+function resizePreview() {
+  previewEl.width = previewEl.parentElement.clientWidth;
+  previewEl.height = previewEl.parentElement.clientHeight;
+}
