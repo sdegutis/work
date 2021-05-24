@@ -71,14 +71,14 @@ class App {
         height: 300,
         backgroundColor: '#222',
         webPreferences: {
-          preload: path.join(__dirname, '../frontend/manage-preload.js'),
+          preload: path.join(__dirname, '../frontend/manage/manage-preload.js'),
         }
       });
 
       this.manageTasksWin = win;
       win.on('closed', () => delete this.manageTasksWin);
 
-      win.loadFile('frontend/manage.html');
+      win.loadFile('frontend/manage/manage.html');
 
       win.on('ready-to-show', () => {
         win.webContents.send('setup', db.data);
@@ -121,14 +121,14 @@ class App {
         height: 600,
         backgroundColor: '#222',
         webPreferences: {
-          preload: path.join(__dirname, '../frontend/invoice-preload.js'),
+          preload: path.join(__dirname, '../frontend/invoice/invoice-preload.js'),
         }
       });
 
       this.invoiceWin = win;
       win.on('closed', () => delete this.invoiceWin);
 
-      win.loadFile('frontend/invoice.html');
+      win.loadFile('frontend/invoice/invoice.html');
 
       win.on('ready-to-show', () => {
         win.webContents.send('setup', db.data);
