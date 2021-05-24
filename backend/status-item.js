@@ -18,6 +18,8 @@ class StatusItem {
    * @param {number} timeSec
    */
   setTitle(taskName, timeSec) {
+    const shortTaskName = taskName.split(/\s+/).map(([c]) => c).join('');
+
     const totalMin = Math.floor(timeSec / 60);
 
     const relSec = timeSec % 60;
@@ -31,7 +33,7 @@ class StatusItem {
 
     const color = db.data.running ? RED : YELLOW;
     const running = db.data.running ? '+' : '-';
-    const title = `${running} ${color}(${taskName}) [${timeStr}]${RESET}`;
+    const title = `${running} ${color}(${shortTaskName}) [${timeStr}]${RESET}`;
 
     if (this.lastSet !== title) {
       this.lastSet = title;
