@@ -39,3 +39,38 @@ body {
 #rate.invalid {
   color: red;
 }
+
+#rate {
+  outline: none;
+  border: 1px solid #777;
+  font: inherit;
+  padding: 7px;
+  width: 3em;
+}
+
+#rate:focus {
+  border-color: #17f;
+}
+
+#save {
+  border: none;
+  outline: none;
+  font: inherit;
+  border: 1px solid #777;
+  padding: 7px;
+  cursor: pointer;
+}
+
+#save:hover {
+  border-color: #17f;
+}
+
+#save:active {
+  border-color: #17f;
+  background: #17f;
+  color: #fff;
+}
+
+iframe {
+  border: none;
+}
