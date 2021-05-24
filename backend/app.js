@@ -66,6 +66,8 @@ class App {
       this.manageTasksWin.focus();
     }
     else {
+      electron.app.dock.show();
+
       const win = new electron.BrowserWindow({
         width: 300,
         height: 300,
@@ -76,7 +78,12 @@ class App {
       });
 
       this.manageTasksWin = win;
-      win.on('closed', () => delete this.manageTasksWin);
+      win.on('closed', () => {
+        delete this.manageTasksWin;
+        if (!this.manageTasksWin && !this.invoiceWin) {
+          electron.app.dock.hide();
+        }
+      });
 
       win.loadFile('frontend/manage/manage.html');
 
@@ -116,6 +123,8 @@ class App {
       this.invoiceWin.focus();
     }
     else {
+      electron.app.dock.show();
+
       const win = new electron.BrowserWindow({
         width: 800,
         height: 600,
@@ -126,7 +135,12 @@ class App {
       });
 
       this.invoiceWin = win;
-      win.on('closed', () => delete this.invoiceWin);
+      win.on('closed', () => {
+        delete this.invoiceWin;
+        if (!this.manageTasksWin && !this.invoiceWin) {
+          electron.app.dock.hide();
+        }
+      });
 
       win.loadFile('frontend/invoice/invoice.html');
 
