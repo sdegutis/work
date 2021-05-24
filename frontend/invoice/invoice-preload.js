@@ -15,9 +15,10 @@ electron.contextBridge.exposeInMainWorld('main', {
     const lines = (data.tasks
       .map(({ name, seconds }) => {
         const hours = seconds / 60 / 60;
-        const time = roundToNearest15Mins(hours);
+        let time = roundToNearest15Mins(hours);
         const rate = data.rate;
         const total = time * rate;
+        time = humanize(time);
         return ({ name, time, rate, total });
       })
       .filter(({ total }) => total > 0)
@@ -35,3 +36,9 @@ electron.ipcRenderer.on('setup', (e, data) => ready(data));
 electron.ipcRenderer.on('refresh', (e) => refresh());
 
 const roundToNearest15Mins = (n) => Math.round(n * 4) / 4;
+
+const humanize = (time) => {
+  const [hours, minsStr] = time.toFixed(2).split('.');
+  const mins = (+minsStr).toFixed();
+  return `${hours}h ${mins / 100 * 60}m`;
+};
