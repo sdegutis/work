@@ -112,12 +112,23 @@ class App {
       this.invoiceWin.focus();
     }
     else {
-      const win = new electron.BrowserWindow();
+      const win = new electron.BrowserWindow({
+        width: 800,
+        height: 600,
+        backgroundColor: '#222',
+        webPreferences: {
+          preload: path.join(__dirname, '../frontend/invoice-preload.js'),
+        }
+      });
 
       this.invoiceWin = win;
       win.on('closed', () => delete this.invoiceWin);
 
       win.loadFile('frontend/invoice.html');
+
+      win.on('ready-to-show', () => {
+        win.webContents.send('setup', db.data);
+      });
     }
   }
 
