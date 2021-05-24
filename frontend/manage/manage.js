@@ -14,6 +14,8 @@ function addTaskItem(name) {
   addLink.parentElement.insertAdjacentElement('beforebegin', li);
 
   li.ondblclick = () => {
+    if (li.querySelector('input')) return;
+
     const index = [...li.parentElement.children].indexOf(li);
 
     const input = document.createElement('input');
