@@ -2,8 +2,10 @@ const electron = require('electron');
 const Handlebars = require("handlebars");
 
 let ready;
+let refresh;
 electron.contextBridge.exposeInMainWorld('main', {
   ready(fn) { ready = fn },
+  refresh(fn) { refresh = fn },
   set(key, val) {
     electron.ipcRenderer.send('set', key, val);
   },
@@ -27,5 +29,6 @@ electron.contextBridge.exposeInMainWorld('main', {
 });
 
 electron.ipcRenderer.on('setup', (e, data) => ready(data));
+electron.ipcRenderer.on('refresh', (e) => refresh());
 
 const roundToNearest15Mins = (n) => Math.round(n * 4) / 4;

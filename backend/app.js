@@ -98,6 +98,7 @@ class App {
           db.save();
           this.rebuildMenu();
           this.updateStatusItemText();
+          this.updateInvoice();
         }
         else if (channel === 'create') {
           const [name] = data;
@@ -105,6 +106,7 @@ class App {
           db.save();
           this.rebuildMenu();
           this.updateStatusItemText();
+          this.updateInvoice();
         }
         else if (channel === 'delete') {
           const [i] = data;
@@ -112,6 +114,7 @@ class App {
           db.save();
           this.rebuildMenu();
           this.updateStatusItemText();
+          this.updateInvoice();
         }
       });
     }
@@ -161,6 +164,12 @@ class App {
           db.save();
         }
       });
+    }
+  }
+
+  updateInvoice() {
+    if (this.invoiceWin) {
+      this.invoiceWin.webContents.send('refresh');
     }
   }
 

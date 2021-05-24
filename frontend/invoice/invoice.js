@@ -3,6 +3,24 @@ const editorEl = document.getElementById('editor');
 const previewEl = /** @type {HTMLIFrameElement} */(document.getElementById('preview'));
 const generateButton = document.getElementById('generate');
 
+let previewTimer;
+function previewSoon() {
+  if (!previewTimer) {
+    previewTimer = setTimeout(previewImmediately, 250);
+  }
+}
+
+function previewImmediately() {
+  previewTimer = undefined;
+  main.transform(editorEl.value).then(html => {
+    previewEl.srcdoc = html;
+  });
+}
+
+main.refresh(() => {
+  previewImmediately();
+});
+
 main.ready((data) => {
   rateEl.value = data.rate.toFixed();
   rateEl.oninput = () => {
@@ -11,6 +29,7 @@ main.ready((data) => {
     rateEl.classList.toggle('invalid', !valid);
     if (valid) {
       main.set('rate', rate);
+      previewSoon();
     }
   };
 
@@ -19,20 +38,6 @@ main.ready((data) => {
     main.set('template', editorEl.value);
     previewSoon();
   };
-
-  let previewTimer;
-  function previewSoon() {
-    if (!previewTimer) {
-      previewTimer = setTimeout(previewImmediately, 250);
-    }
-  }
-
-  function previewImmediately() {
-    previewTimer = undefined;
-    main.transform(editorEl.value).then(html => {
-      previewEl.srcdoc = html;
-    });
-  }
 
   previewImmediately();
 
