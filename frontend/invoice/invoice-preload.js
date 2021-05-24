@@ -56,11 +56,25 @@ const MONEY_FORMATTER = new Intl.NumberFormat('en-EN', {
   currency: 'USD',
 });
 
+const DOLLARS_FORMATTER = new Intl.NumberFormat('en-EN', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
+});
+
 const money = (amount) => {
   return MONEY_FORMATTER.format(amount);
 };
 
-Handlebars.registerHelper({ humanize, money });
+const dollars = (amount) => {
+  return DOLLARS_FORMATTER.format(amount);
+};
+
+Handlebars.registerHelper({
+  humanize,
+  money,
+  dollars,
+});
 
 const PRELUDE = `
 <style>

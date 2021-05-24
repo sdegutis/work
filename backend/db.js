@@ -21,7 +21,7 @@ const DEFAULT_TEMPLATE = `
 <tr>
 <td>{{name}}</td>
 <td>{{humanize time}}</td>
-<td>{{rate}}</td>
+<td>{{dollars rate}}</td>
 <td>{{money total}}</td>
 </tr>
 {{/each}}
