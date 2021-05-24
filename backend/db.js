@@ -11,6 +11,12 @@ const DEFAULT_TEMPLATE = `
 <h1>Invoice</h1>
 
 <table>
+<tr>
+<th>Description</th>
+<th>Hours</th>
+<th>Rate</th>
+<th>Total</th>
+</tr>
 {{#each lines}}
 <tr>
 <td>{{name}}</td>
@@ -19,6 +25,12 @@ const DEFAULT_TEMPLATE = `
 <td>{{total}}</td>
 </tr>
 {{/each}}
+<tr>
+<td></td>
+<td>{{totalHours}}</td>
+<td>Total</td>
+<td>{{totalCharge}}</td>
+</tr>
 </table>
 
 <p>Total: {{total}}</p>

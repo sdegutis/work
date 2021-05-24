@@ -15,20 +15,28 @@ electron.contextBridge.exposeInMainWorld('main', {
     const lines = (data.tasks
       .map(({ name, seconds }) => {
         const hours = seconds / 60 / 60;
-        let time = roundToNearest15Mins(hours);
+        const time = roundToNearest15Mins(hours);
         const rate = data.rate;
         const total = time * rate;
-        time = humanize(time);
         return ({ name, time, rate, total });
       })
       .filter(({ total }) => total > 0)
     );
 
-    const total = (lines
+    const totalCharge = (lines
       .map(line => line.total)
       .reduce((a, b) => a + b, 0));
 
-    return Handlebars.compile(text)({ ...data, lines, total });
+    const totalHours = (lines
+      .map(line => line.time)
+      .reduce((a, b) => a + b, 0));
+
+    return Handlebars.compile(text)({
+      ...data,
+      lines,
+      totalCharge,
+      totalHours,
+    });
   },
 });
 
