@@ -13,7 +13,7 @@ function previewSoon() {
 function previewImmediately() {
   previewTimer = undefined;
   main.transform(editor.getValue()).then(html => {
-    previewEl.srcdoc = PRELUDE + html;
+    previewEl.srcdoc = html;
   });
 }
 
@@ -67,35 +67,3 @@ function resizePreview() {
   previewEl.width = previewEl.parentElement.clientWidth;
   previewEl.height = previewEl.parentElement.clientHeight;
 }
-
-const PRELUDE = `
-<style>
-/* PDF */
-@media screen {
-  html {
-    background: #f0f0f0;
-    width: 9.5in;
-  }
-
-  body {
-    width: 8.5in;
-    background: #fff;
-    padding: 1in;
-    margin: 2em;
-    box-shadow: 0px 1px 3px 1px #0001;
-  }
-}
-
-@page {
-  margin: 1in;
-}
-
-/* Reset */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-</style>
-`.trim();

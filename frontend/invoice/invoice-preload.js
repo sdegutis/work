@@ -31,7 +31,7 @@ electron.contextBridge.exposeInMainWorld('main', {
       .map(line => line.time)
       .reduce((a, b) => a + b, 0));
 
-    return Handlebars.compile(text)({
+    return PRELUDE + Handlebars.compile(text)({
       ...data,
       lines,
       totalCharge,
@@ -61,3 +61,35 @@ const money = (amount) => {
 };
 
 Handlebars.registerHelper({ humanize, money });
+
+const PRELUDE = `
+<style>
+/* PDF */
+@media screen {
+  html {
+    background: #f0f0f0;
+    width: 9.5in;
+  }
+
+  body {
+    width: 8.5in;
+    background: #fff;
+    padding: 1in;
+    margin: 2em;
+    box-shadow: 0px 1px 3px 1px #0001;
+  }
+}
+
+@page {
+  margin: 1in;
+}
+
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+</style>
+`.trim();
