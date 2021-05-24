@@ -1,10 +1,9 @@
 const electron = require('electron');
 const db = require('./db');
 
-const RED = '\033[31;1m';
-const YELLOW = '\033[33;1m';
-const BLUE = '\033[34;1m';
-const RESET = '\033[0m';
+const RED = '\033[31m';
+const YELLOW = '\033[33m';
+const BLUE = '\033[36m';
 
 class StatusItem {
 
@@ -32,12 +31,11 @@ class StatusItem {
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
     const color = db.data.running ? RED : YELLOW;
-    const running = db.data.running ? '+' : '-';
-    const title = `${running} ${color}(${shortTaskName}) [${timeStr}]${RESET}`;
+    const title = `${BLUE}(${shortTaskName}) ${color}[${timeStr}]`;
 
     if (this.lastSet !== title) {
       this.lastSet = title;
-      this.tray.setTitle(title, { fontType: 'monospacedDigit' });
+      this.tray.setTitle(title);
     }
   }
 
