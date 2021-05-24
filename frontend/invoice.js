@@ -4,8 +4,6 @@ const previewEl = document.getElementById('right');
 const generateButton = document.getElementById('generate');
 
 main.ready((data) => {
-  console.log(data);
-
   rateEl.value = data.rate.toFixed();
   rateEl.oninput = () => {
     const rate = +rateEl.value;
