@@ -20,30 +20,30 @@ html {
 }
 
 #settings ul {
-  border: 1px solid #333;
+  border: 1px solid #000;
   background-color: #111;
 }
 
-#settings li {
+#settings #tasks li {
   list-style-type: none;
 }
 
-#settings a {
+#settings #tasks a {
   color: #2af;
   text-decoration: none;
 }
 
-#settings .item {
+#settings #tasks .item {
   padding: 0.5rem;
   display: block;
   width: 100%;
 }
 
-#settings .item:hover {
+#settings #tasks .item:hover {
   background-color: #222;
 }
 
-#settings input {
+#settings #tasks input {
   border: none;
   outline: none;
   background-color: transparent;
@@ -51,6 +51,25 @@ html {
   font: inherit;
 }
 
-#settings input.item:focus {
+#settings #tasks input.item:focus {
   background-color: #258;
+}
+
+#settings #rate {
+  border: none;
+  outline: none;
+  border: 1px solid #000;
+  background-color: #111;
+  color: inherit;
+  font: inherit;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+#settings #rate:focus {
+  background-color: #258;
+}
+
+#settings #rate.invalid {
+  color: red;
 }

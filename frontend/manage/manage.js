@@ -1,5 +1,6 @@
 const tasksEl = document.getElementById('tasks');
 const addLink = document.getElementById('add');
+const rateEl = document.getElementById('rate');
 
 function addTaskItem(name) {
   const li = document.createElement('li');
@@ -55,6 +56,16 @@ function addTaskItem(name) {
 }
 
 main.ready((data) => {
+  rateEl.value = data.rate.toFixed();
+  rateEl.oninput = () => {
+    const rate = +rateEl.value;
+    const valid = !isNaN(rate);
+    rateEl.classList.toggle('invalid', !valid);
+    if (valid) {
+      main.setRate(rate);
+    }
+  };
+
   data.tasks.forEach(({ name }) => {
     addTaskItem(name);
   });

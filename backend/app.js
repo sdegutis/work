@@ -79,8 +79,8 @@ class App {
       electron.app.dock.show();
 
       const win = new electron.BrowserWindow({
-        width: 300,
-        height: 300,
+        width: 260,
+        height: 400,
         backgroundColor: '#222',
         webPreferences: {
           preload: path.join(__dirname, '../frontend/manage/manage-preload.js'),
@@ -124,6 +124,12 @@ class App {
           db.save();
           this.rebuildMenu();
           this.updateStatusItemText();
+          this.updateInvoice();
+        }
+        else if (channel === 'set-rate') {
+          const [rate] = data;
+          db.data.rate = rate;
+          db.save();
           this.updateInvoice();
         }
       });
