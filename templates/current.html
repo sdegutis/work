@@ -1,4 +1,88 @@
-<h1>Invoice</h1>
+<style>
+  html {
+    font-family: sans-serif;
+    font-size: 12pt;
+  }
+
+  #sections {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 2em 0;
+  }
+
+  .section span {
+    display: block;
+    text-indent: -1em;
+    padding-left: 1em;
+  }
+
+  .section h3 {
+    margin: 0 0 1rem;
+  }
+
+  table {
+    margin: 2em 0;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  p {
+    margin: 2em 0;
+  }
+
+  th,
+  td {
+    padding: 0.75rem;
+    border: 1px solid #eee;
+    white-space: nowrap;
+  }
+
+  :is(th, td):first-child {
+    width: 99%;
+  }
+
+  th {
+    text-align: left;
+    background: #17b;
+    color: #fff;
+  }
+
+  tr:last-child td {
+    background: #f7f7f7;
+    font-weight: bold;
+  }
+</style>
+
+<div id="sections">
+
+  <div class="section">
+    <h3>Invoice</h3>
+    <span><i>Invoice #:</i> 001</span>
+    <span><i>Date:</i> 6/1/2020</span>
+    <span><i>Terms:</i> 15 Days</span>
+  </div>
+
+  <div class="section">
+    <h3>From</h3>
+    <span>Some Consultant</span>
+    <span>consultant@example.com</span>
+    <span>1234 Fake St.</span>
+    <span>Citytown, USA</span>
+    <span>12345</span>
+  </div>
+
+  <div class="section">
+    <h3>For</h3>
+    <span><i>Attention:</i> Accounting</span>
+    <span><i>Company:</i> Some Client</span>
+    <span><i>Email:</i> client@example.com</span>
+    <span><i>Address:</i> 5678 Fake Ave.<br>
+      SomeCity USA, 67890</span>
+  </div>
+
+</div>
 
 <table>
   <tr>
@@ -23,6 +107,5 @@
   </tr>
 </table>
 
-<p>Total: {{total}}</p>
-
-<p>Thanks!</p>
+<p>Thanks for your business, looking forward to our continued collaboration!</p>
+<p>Regards,<br>Some Consultant</p>
