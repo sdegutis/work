@@ -31,7 +31,7 @@ function readData() {
 
 function saveImmediately() {
   writeFileAtomic.sync(dataFilePath, JSON.stringify(module.exports.data, null, 2));
-  console.log('saved data');
+  console.log('saved data', new Date().toLocaleString());
 }
 
 /** @type {NodeJS.Timeout | undefined} */
