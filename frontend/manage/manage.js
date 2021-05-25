@@ -2,6 +2,9 @@ const tasksEl = document.getElementById('tasks');
 const addLink = document.getElementById('add');
 const rateEl = document.getElementById('rate');
 
+const query = new URLSearchParams(window.location.search);
+const data = JSON.parse(query.get('data'));
+
 function addTaskItem(name) {
   const li = document.createElement('li');
   const showName = () => {
@@ -55,48 +58,46 @@ function addTaskItem(name) {
   };
 }
 
-main.ready((data) => {
-  rateEl.value = data.rate.toFixed();
-  rateEl.oninput = () => {
-    const rate = +rateEl.value;
-    const valid = !isNaN(rate);
-    rateEl.classList.toggle('invalid', !valid);
-    if (valid) {
-      main.setRate(rate);
+rateEl.value = data.rate.toFixed();
+rateEl.oninput = () => {
+  const rate = +rateEl.value;
+  const valid = !isNaN(rate);
+  rateEl.classList.toggle('invalid', !valid);
+  if (valid) {
+    main.setRate(rate);
+  }
+};
+
+data.tasks.forEach(({ name }) => {
+  addTaskItem(name);
+});
+
+addLink.onclick = (e) => {
+  e.preventDefault();
+
+  const li = document.createElement('li');
+  addLink.parentElement.insertAdjacentElement('beforebegin', li);
+
+  const input = document.createElement('input');
+  input.className = 'item';
+
+  input.onkeydown = (e) => {
+    if (e.key === 'Enter') {
+      const name = input.value.trim();
+      main.create(name);
+
+      input.onblur = null;
+      li.remove();
+
+      addTaskItem(name);
+    }
+    else if (e.key === 'Escape') {
+      input.onblur = null;
+      li.remove();
     }
   };
+  input.onblur = () => li.remove();
 
-  data.tasks.forEach(({ name }) => {
-    addTaskItem(name);
-  });
-
-  addLink.onclick = (e) => {
-    e.preventDefault();
-
-    const li = document.createElement('li');
-    addLink.parentElement.insertAdjacentElement('beforebegin', li);
-
-    const input = document.createElement('input');
-    input.className = 'item';
-
-    input.onkeydown = (e) => {
-      if (e.key === 'Enter') {
-        const name = input.value.trim();
-        main.create(name);
-
-        input.onblur = null;
-        li.remove();
-
-        addTaskItem(name);
-      }
-      else if (e.key === 'Escape') {
-        input.onblur = null;
-        li.remove();
-      }
-    };
-    input.onblur = () => li.remove();
-
-    li.append(input);
-    input.focus();
-  };
-});
+  li.append(input);
+  input.focus();
+};

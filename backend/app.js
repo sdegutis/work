@@ -95,10 +95,8 @@ class App {
         }
       });
 
-      win.loadFile('frontend/manage/manage.html');
-
-      win.on('ready-to-show', () => {
-        win.webContents.send('setup', db.data);
+      win.loadFile('frontend/manage/manage.html', {
+        query: { data: JSON.stringify(db.data) },
       });
 
       win.webContents.on('ipc-message', (event, channel, ...data) => {
