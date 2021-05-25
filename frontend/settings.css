@@ -12,11 +12,18 @@ html {
 
 #settings {
   margin: 1em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+#settings>*:nth-child(2n+1) {
+  text-align: right;
 }
 
 #settings h1 {
   font-size: 100%;
-  margin: 1rem 0;
 }
 
 #settings ul {

@@ -87,8 +87,13 @@ class App {
       electron.app.dock.show();
 
       const win = new electron.BrowserWindow({
-        width: 260,
-        height: 450,
+        width: 350,
+        height: 350,
+        minWidth: 350,
+        minHeight: 350,
+        maxWidth: 500,
+        maximizable: false,
+        minimizable: false,
         backgroundColor: '#222',
         webPreferences: {
           preload: path.join(__dirname, '../frontend/settings-preload.js'),
