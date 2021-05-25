@@ -48,7 +48,7 @@ class App {
 
       { type: 'separator' },
 
-      { label: 'Manage Tasks', click: this.manageTasks.bind(this) },
+      { label: 'Settings', click: this.manageTasks.bind(this) },
       { label: 'Generate Invoice', click: this.generateInvoice.bind(this) },
       { label: 'Reset Work', click: this.resetWork.bind(this) },
 

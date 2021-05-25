@@ -10,26 +10,40 @@ html {
   box-sizing: border-box;
 }
 
-li {
+#settings {
+  margin: 1em;
+}
+
+#settings h1 {
+  font-size: 100%;
+  margin: 1rem 0;
+}
+
+#settings ul {
+  border: 1px solid #333;
+  background-color: #111;
+}
+
+#settings li {
   list-style-type: none;
 }
 
-a {
+#settings a {
   color: #2af;
   text-decoration: none;
 }
 
-.item {
+#settings .item {
   padding: 0.5rem;
   display: block;
   width: 100%;
 }
 
-.item:hover {
-  background-color: #333;
+#settings .item:hover {
+  background-color: #222;
 }
 
-input {
+#settings input {
   border: none;
   outline: none;
   background-color: transparent;
@@ -37,6 +51,6 @@ input {
   font: inherit;
 }
 
-input.item:focus {
+#settings input.item:focus {
   background-color: #258;
 }
