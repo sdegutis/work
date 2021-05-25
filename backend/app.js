@@ -2,7 +2,10 @@ const electron = require('electron');
 const StatusItem = require('./status-item');
 const db = require('./db');
 const path = require('path');
-const templateDir = require('./templates');
+const fs = require('fs-extra');
+const templates = require('./templates');
+const invoices = require('./invoices');
+const pdf = require('html-pdf');
 
 class App {
 
@@ -132,27 +135,32 @@ class App {
           this.updateInvoice();
         }
         else if (channel === 'show-templates') {
-          electron.shell.openPath(templateDir);
+          electron.shell.openPath(templates.templateDir);
         }
       });
     }
   }
 
   generateInvoice() {
+    this.doInvoice(true);
+  }
+
+  /**
+   * @param {boolean} focus
+   */
+  doInvoice(focus) {
     if (this.invoiceWin) {
-      electron.app.focus({ steal: true });
-      this.invoiceWin.focus();
+      if (focus) {
+        electron.app.focus({ steal: true });
+        this.invoiceWin.focus();
+      }
     }
     else {
       electron.app.dock.show();
 
       const win = new electron.BrowserWindow({
-        width: 800,
-        height: 600,
-        backgroundColor: '#222',
-        webPreferences: {
-          preload: path.join(__dirname, '../frontend/invoice/invoice-preload.js'),
-        }
+        width: 450,
+        height: 650,
       });
 
       this.invoiceWin = win;
@@ -162,33 +170,22 @@ class App {
           electron.app.dock.hide();
         }
       });
-
-      win.loadFile('frontend/invoice/invoice.html');
-
-      win.on('ready-to-show', () => {
-        win.webContents.send('setup', db.data);
-      });
-
-      win.webContents.on('ipc-message', (event, channel, ...data) => {
-        if (channel === 'set') {
-          const [key, val] = data;
-
-          if (key === 'rate') {
-            db.data[/** @type {'rate'} */(key)] = val;
-          }
-          else if (key === 'template') {
-            db.data[/** @type {'template'} */(key)] = val;
-          }
-          db.save();
-        }
-      });
     }
+
+    const inputTemplate = templates.currentTemplate();
+
+    invoices.transform(db.data, inputTemplate).then(html => {
+      pdf.create(html, {
+        format: 'Letter',
+        border: '1in',
+      }).toFile(invoices.invoicePdfPath, (err, res) => {
+        this.invoiceWin?.loadFile(invoices.invoicePdfPath);
+      });
+    });
   }
 
   updateInvoice() {
-    if (this.invoiceWin) {
-      this.invoiceWin.webContents.send('refresh');
-    }
+    this.doInvoice(false);
   }
 
   resetWork() {

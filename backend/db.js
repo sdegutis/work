@@ -7,14 +7,14 @@ const datadir = electron.app.getPath('userData');
 const dataFilePath = path.join(datadir, 'data.json');
 
 /**
- * @type {{
- *   running: boolean,
- *   currentTaskIndex: number,
- *   tasks: { name: string, seconds: number }[],
- *   template: string,
- *   rate: number,
- * }}
+ * @typedef Data
+ * @property {boolean} running
+ * @property {number} currentTaskIndex
+ * @property {{ name: string, seconds: number }[]} tasks
+ * @property {number} rate
  */
+
+/** @type {Data} */
 module.exports.data = readData() || {
   running: false,
   currentTaskIndex: -1,
