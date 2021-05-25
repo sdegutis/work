@@ -10,9 +10,10 @@ if (!fs.existsSync(templateDir)) {
   fs.copy(templateInDir, templateDir);
 }
 
-function currentTemplate() {
-  const currentPath = path.join(templateDir, 'current.html');
-  return fs.readFileSync(currentPath, 'utf-8');
+const currentTemplatePath = path.join(templateDir, 'current.html');
+
+function getCurrentTemplate() {
+  return fs.readFileSync(currentTemplatePath, 'utf-8');
 }
 
-module.exports = { templateDir, currentTemplate };
+module.exports = { templateDir, currentTemplatePath, getCurrentTemplate };

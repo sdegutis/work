@@ -6,6 +6,7 @@ const fs = require('fs-extra');
 const templates = require('./templates');
 const invoices = require('./invoices');
 const pdf = require('html-pdf');
+const chokidar = require('chokidar');
 
 class App {
 
@@ -163,8 +164,15 @@ class App {
         height: 650,
       });
 
+      const watcher = chokidar.watch(templates.currentTemplatePath, {
+        ignoreInitial: true,
+      }).on('all', () => {
+        this.updateInvoice();
+      });
+
       this.invoiceWin = win;
       win.on('closed', () => {
+        watcher.close();
         delete this.invoiceWin;
         if (!this.manageTasksWin && !this.invoiceWin) {
           electron.app.dock.hide();
@@ -172,7 +180,7 @@ class App {
       });
     }
 
-    const inputTemplate = templates.currentTemplate();
+    const inputTemplate = templates.getCurrentTemplate();
 
     invoices.transform(db.data, inputTemplate).then(html => {
       pdf.create(html, {
