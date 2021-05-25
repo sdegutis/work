@@ -149,6 +149,12 @@ class App {
     this.doInvoice(true);
   }
 
+  updateInvoice() {
+    if (this.invoiceWin) {
+      this.doInvoice(false);
+    }
+  }
+
   /**
    * @param {boolean} focus
    */
@@ -201,10 +207,6 @@ class App {
         });
       });
     });
-  }
-
-  updateInvoice() {
-    this.doInvoice(false);
   }
 
   resetWork() {
