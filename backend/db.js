@@ -4,7 +4,7 @@ const fs = require('fs-extra');
 var writeFileAtomic = require('write-file-atomic');
 
 const datadir = electron.app.getPath('userData');
-const filepath = path.join(datadir, 'data.json');
+const dataFilePath = path.join(datadir, 'data.json');
 
 copyTemplatesIfNeeded();
 
@@ -25,14 +25,14 @@ module.exports.data = readData() || {
 };
 
 function readData() {
-  if (fs.existsSync(filepath)) {
-    const content = fs.readFileSync(filepath, 'utf8');
+  if (fs.existsSync(dataFilePath)) {
+    const content = fs.readFileSync(dataFilePath, 'utf8');
     return JSON.parse(content);
   }
 }
 
 function saveImmediately() {
-  writeFileAtomic.sync(filepath, JSON.stringify(module.exports.data, null, 2));
+  writeFileAtomic.sync(dataFilePath, JSON.stringify(module.exports.data, null, 2));
   console.log('saved data');
 }
 
