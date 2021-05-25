@@ -5,7 +5,6 @@ const path = require('path');
 const fs = require('fs-extra');
 const templates = require('./templates');
 const invoices = require('./invoices');
-const pdf = require('html-pdf');
 const chokidar = require('chokidar');
 
 class App {
@@ -183,11 +182,25 @@ class App {
     const inputTemplate = templates.getCurrentTemplate();
 
     invoices.transform(db.data, inputTemplate).then(html => {
-      pdf.create(html, {
-        format: 'Letter',
-        border: '0.5in',
-      }).toFile(invoices.invoicePdfPath, (err, res) => {
-        this.invoiceWin?.loadFile(invoices.invoicePdfPath);
+      const pdfWin = new electron.BrowserWindow({
+        show: false,
+      });
+
+      const htmlPath = path.join(invoices.invoicePdfPath, '../converted.html');
+      fs.writeFileSync(htmlPath, html);
+
+      pdfWin.loadFile(htmlPath);
+      pdfWin.on('ready-to-show', () => {
+        pdfWin.webContents.printToPDF({
+          printBackground: true,
+          marginsType: 0,
+          pageSize: 'Letter',
+        }).then(buf => {
+          fs.writeFileSync(invoices.invoicePdfPath, buf);
+          this.invoiceWin?.loadFile(invoices.invoicePdfPath);
+
+          pdfWin.close();
+        });
       });
     });
   }
