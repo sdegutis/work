@@ -91,7 +91,7 @@ class App {
         height: 450,
         backgroundColor: '#222',
         webPreferences: {
-          preload: path.join(__dirname, '../frontend/manage/manage-preload.js'),
+          preload: path.join(__dirname, '../frontend/settings-preload.js'),
         }
       });
 
@@ -103,7 +103,7 @@ class App {
         }
       });
 
-      win.loadFile('frontend/manage/manage.html', {
+      win.loadFile('frontend/settings.html', {
         query: { data: JSON.stringify(db.data) },
       });
 
