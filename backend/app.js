@@ -185,7 +185,7 @@ class App {
     invoices.transform(db.data, inputTemplate).then(html => {
       pdf.create(html, {
         format: 'Letter',
-        border: '1in',
+        border: '0.5in',
       }).toFile(invoices.invoicePdfPath, (err, res) => {
         this.invoiceWin?.loadFile(invoices.invoicePdfPath);
       });
