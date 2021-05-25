@@ -22,6 +22,10 @@ class App {
     electron.ipcMain.handle('get-data', (e) => {
       return db.data;
     });
+
+    this.pdfWin = new electron.BrowserWindow({
+      show: false,
+    });
   }
 
   updateStatusItemText() {
@@ -182,24 +186,18 @@ class App {
     const inputTemplate = templates.getCurrentTemplate();
 
     invoices.transform(db.data, inputTemplate).then(html => {
-      const pdfWin = new electron.BrowserWindow({
-        show: false,
-      });
-
       const htmlPath = path.join(invoices.invoicePdfPath, '../converted.html');
       fs.writeFileSync(htmlPath, html);
 
-      pdfWin.loadFile(htmlPath);
-      pdfWin.on('ready-to-show', () => {
-        pdfWin.webContents.printToPDF({
+      this.pdfWin.loadFile(htmlPath);
+      this.pdfWin.webContents.once('did-finish-load', () => {
+        this.pdfWin.webContents.printToPDF({
           printBackground: true,
           marginsType: 0,
           pageSize: 'Letter',
         }).then(buf => {
           fs.writeFileSync(invoices.invoicePdfPath, buf);
           this.invoiceWin?.loadFile(invoices.invoicePdfPath);
-
-          pdfWin.close();
         });
       });
     });
