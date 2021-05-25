@@ -87,18 +87,18 @@ html {
   border: 1px solid #000;
   background-color: #111;
   cursor: pointer;
-  color: inherit;
+  color: #2af;
   font: inherit;
   padding: 0.5rem;
 }
 
 #settings #showTemplates:hover {
-  border-color: #258;
+  background-color: #222;
 }
 
 #settings #showTemplates:active {
-  border-color: #258;
   background-color: #258;
+  color: #fff;
 }
 
 #settings #showTemplates.invalid {
