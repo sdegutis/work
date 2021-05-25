@@ -85,7 +85,7 @@ class App {
 
       const win = new electron.BrowserWindow({
         width: 260,
-        height: 400,
+        height: 450,
         backgroundColor: '#222',
         webPreferences: {
           preload: path.join(__dirname, '../frontend/manage/manage-preload.js'),
@@ -161,7 +161,7 @@ class App {
 
       const win = new electron.BrowserWindow({
         width: 450,
-        height: 650,
+        height: 675,
       });
 
       const watcher = chokidar.watch(templates.currentTemplatePath, {
