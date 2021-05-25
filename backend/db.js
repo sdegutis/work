@@ -6,8 +6,6 @@ var writeFileAtomic = require('write-file-atomic');
 const datadir = electron.app.getPath('userData');
 const dataFilePath = path.join(datadir, 'data.json');
 
-copyTemplatesIfNeeded();
-
 /**
  * @type {{
  *   running: boolean,
@@ -50,13 +48,3 @@ setInterval(saveSoon, 1000 * 30);
 saveImmediately();
 
 electron.app.on('quit', saveImmediately);
-
-function copyTemplatesIfNeeded() {
-  const templateOutDir = path.join(datadir, 'templates');
-
-  if (!fs.existsSync(templateOutDir)) {
-    const templateInDir = path.join(__dirname, '../templates');
-
-    fs.copy(templateInDir, templateOutDir);
-  }
-}

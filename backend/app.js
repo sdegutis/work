@@ -2,6 +2,7 @@ const electron = require('electron');
 const StatusItem = require('./status-item');
 const db = require('./db');
 const path = require('path');
+const templateDir = require('./templates');
 
 class App {
 
@@ -131,9 +132,7 @@ class App {
           this.updateInvoice();
         }
         else if (channel === 'show-templates') {
-          const datadir = electron.app.getPath('userData');
-          const dir = path.join(datadir, 'templates');
-          electron.shell.openPath(dir);
+          electron.shell.openPath(templateDir);
         }
       });
     }
