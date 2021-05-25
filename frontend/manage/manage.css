@@ -73,3 +73,27 @@ html {
 #settings #rate.invalid {
   color: red;
 }
+
+#settings #showTemplates {
+  border: none;
+  outline: none;
+  border: 1px solid #000;
+  background-color: #111;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  padding: 0.5rem;
+}
+
+#settings #showTemplates:hover {
+  border-color: #258;
+}
+
+#settings #showTemplates:active {
+  border-color: #258;
+  background-color: #258;
+}
+
+#settings #showTemplates.invalid {
+  color: red;
+}

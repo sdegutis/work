@@ -1,43 +1,12 @@
 const electron = require('electron');
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 var writeFileAtomic = require('write-file-atomic');
 
 const datadir = electron.app.getPath('userData');
 const filepath = path.join(datadir, 'data.json');
 
-const DEFAULT_TEMPLATE = `
-
-<h1>Invoice</h1>
-
-<table>
-<tr>
-<th>Description</th>
-<th>Hours</th>
-<th>Rate</th>
-<th>Total</th>
-</tr>
-{{#each lines}}
-<tr>
-<td>{{name}}</td>
-<td>{{humanize time}}</td>
-<td>{{dollars rate}}</td>
-<td>{{money total}}</td>
-</tr>
-{{/each}}
-<tr>
-<td></td>
-<td>{{humanize totalHours}}</td>
-<td>Total</td>
-<td>{{money totalCharge}}</td>
-</tr>
-</table>
-
-<p>Total: {{total}}</p>
-
-<p>Thanks!</p>
-
-`.trim();
+copyTemplatesIfNeeded();
 
 /**
  * @type {{
@@ -52,7 +21,6 @@ module.exports.data = readData() || {
   running: false,
   currentTaskIndex: -1,
   tasks: [],
-  template: DEFAULT_TEMPLATE,
   rate: 30,
 };
 
@@ -82,3 +50,13 @@ setInterval(saveSoon, 1000 * 30);
 saveImmediately();
 
 electron.app.on('quit', saveImmediately);
+
+function copyTemplatesIfNeeded() {
+  const templateOutDir = path.join(datadir, 'templates');
+
+  if (!fs.existsSync(templateOutDir)) {
+    const templateInDir = path.join(__dirname, '../templates');
+
+    fs.copy(templateInDir, templateOutDir);
+  }
+}

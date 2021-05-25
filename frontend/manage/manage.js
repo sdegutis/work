@@ -1,6 +1,7 @@
 const tasksEl = document.getElementById('tasks');
 const addLink = document.getElementById('add');
 const rateEl = document.getElementById('rate');
+const showTemplatesButton = document.getElementById('showTemplates');
 
 const query = new URLSearchParams(window.location.search);
 const data = JSON.parse(query.get('data'));
@@ -57,6 +58,11 @@ function addTaskItem(name) {
     input.select();
   };
 }
+
+showTemplatesButton.onclick = (e) => {
+  e.preventDefault();
+  main.showTemplates();
+};
 
 rateEl.value = data.rate.toFixed();
 rateEl.oninput = () => {

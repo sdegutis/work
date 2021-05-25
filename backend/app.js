@@ -130,6 +130,11 @@ class App {
           db.save();
           this.updateInvoice();
         }
+        else if (channel === 'show-templates') {
+          const datadir = electron.app.getPath('userData');
+          const dir = path.join(datadir, 'templates');
+          electron.shell.openPath(dir);
+        }
       });
     }
   }

@@ -5,4 +5,5 @@ electron.contextBridge.exposeInMainWorld('main', {
   delete(i) { electron.ipcRenderer.send('delete', i) },
   create(name) { electron.ipcRenderer.send('create', name) },
   setRate(rate) { electron.ipcRenderer.send('set-rate', rate) },
+  showTemplates() { electron.ipcRenderer.send('show-templates') },
 });
