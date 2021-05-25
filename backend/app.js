@@ -209,8 +209,22 @@ class App {
     });
   }
 
-  resetWork() {
+  async resetWork() {
+    electron.app.focus({ steal: true });
+    const result = await electron.dialog.showMessageBox({
+      message: 'Reset ALL work?',
+      buttons: ['Reset', 'Cancel'],
+      defaultId: 1,
+    });
 
+    if (result.response === 0) {
+      for (const task of db.data.tasks) {
+        task.seconds = 0;
+      }
+      db.save();
+      this.updateStatusItemText();
+      this.updateInvoice();
+    }
   }
 
   /**
