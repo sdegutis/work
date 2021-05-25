@@ -58,7 +58,7 @@ class App {
 
       { label: 'Settings', click: this.manageTasks.bind(this) },
       { label: 'Generate Invoice', click: this.generateInvoice.bind(this) },
-      { label: 'Reset Work', click: this.resetWork.bind(this) },
+      { label: 'Reset All Hours', click: this.resetWork.bind(this) },
 
       { type: 'separator' },
 
