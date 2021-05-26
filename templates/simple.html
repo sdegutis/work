@@ -1,0 +1,184 @@
+<style>
+  html {
+    font-family: sans-serif;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 4em;
+  }
+
+  h1 {
+    font-size: 300%;
+    margin: 0;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+  }
+
+  .push-down {
+    padding-top: 2em;
+  }
+
+  .space {
+    height: 4em;
+  }
+
+  .space.small {
+    height: 2em;
+  }
+
+  .header {
+    padding: 2px 10px;
+  }
+
+  .header:not(:last-child) {
+    border-right: 1px solid #ddd;
+  }
+
+  .line td {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .no-bottom-border td {
+    border-bottom: none;
+    font-weight: bold;
+  }
+
+  .row>*:nth-child(1) {
+    text-align: left;
+  }
+
+  .row>*:nth-child(2) {
+    text-align: left;
+  }
+
+  .row>*:nth-child(3) {
+    text-align: right;
+  }
+
+  .row>*:nth-child(4) {
+    text-align: right;
+  }
+
+  .row>*:nth-child(5) {
+    text-align: right;
+  }
+
+  .line td:last-child,
+  .line th:last-child {
+    border-right: none;
+  }
+
+  .line td:first-child,
+  .line th:first-child {
+    border-left: none;
+  }
+
+  .line th {
+    border-right: 1px solid #ddd;
+  }
+
+  .blocky>* {
+    display: block;
+  }
+
+  .liney>* {
+    display: block;
+  }
+
+  .liney>*:not(:last-child) {
+    margin-bottom: 7px;
+  }
+
+  .border-left {
+    padding-left: 10px;
+    border-left: 1px solid #ddd;
+  }
+
+  .align-right {
+    text-align: right;
+    padding-right: 10px;
+  }
+</style>
+
+<table>
+
+  <tr>
+    <td colspan="2">
+      <h1>Invoice</h1>
+    </td>
+    <td class="align-right">From</td>
+    <td colspan="2" class="blocky border-left">
+      <b>Some Consultant</b>
+      <span>consultant@example.com</span>
+      <span>1234 Fake St.</span>
+      <span>Citytown, USA, 12345</span>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="space small" colspan="5"></td>
+  </tr>
+
+  <tr>
+    <td class="liney">
+      <span>Invoice ID</span>
+      <span>Issue Date</span>
+      <span>Terms</span>
+    </td>
+    <td>
+      <div class="liney border-left">
+        <span>001</span>
+        <span>6/1/2020</span>
+        <span>15 Days</span>
+      </div>
+    </td>
+    <td class="align-right">For</td>
+    <td colspan="2" class="blocky border-left">
+      <b>Some Client</b>
+      <span><i>Attention:</i> Accounting</span>
+      <span>client@example.com</span>
+      <span>5678 Fake Ave.</span>
+      <span>SomeCity USA, 67890</span>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="space" colspan="5"></td>
+  </tr>
+
+  <tr class="row">
+    <th class="gray header">Item Type</th>
+    <th class="gray header">Description</th>
+    <th class="gray header">Hours</th>
+    <th class="gray header">Rate</th>
+    <th class="gray header">Total</th>
+  </tr>
+
+  {{#each lines}}
+  <tr class="line row">
+    <td>Service</td>
+    <td>{{name}}</td>
+    <td>{{humanize time}}</td>
+    <td>{{dollars rate}}</td>
+    <td>{{money total}}</td>
+  </tr>
+  {{/each}}
+
+  <tr class="line no-bottom-border row">
+    <td></td>
+    <td></td>
+    <td class="gray">{{humanize totalHours}}</td>
+    <td class="gray">Total</td>
+    <td class="gray">{{money totalCharge}}</td>
+  </tr>
+
+</table>
+
+<p>Thanks for your business! Looking forward to future collaboration.</p>
+<p>Regards,<br>Some Consultant</p>

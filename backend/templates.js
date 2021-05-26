@@ -10,7 +10,7 @@ if (!fs.existsSync(templateDir)) {
   fs.copy(templateInDir, templateDir);
 }
 
-const currentTemplatePath = path.join(templateDir, 'current.html');
+const currentTemplatePath = path.join(templateDir, '_current.html');
 
 function getCurrentTemplate() {
   return fs.readFileSync(currentTemplatePath, 'utf-8');
