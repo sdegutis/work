@@ -35,7 +35,7 @@ async function transform(data, text) {
 }
 
 const roundToNearest15Mins = (/** @type {number} */n) =>
-  Math.round(n * 4) / 4;
+  Math.floor(n * 4) / 4;
 
 const humanize = (/** @type {number} */ time) => {
   const [hours, minsStr] = time.toFixed(2).split('.');
