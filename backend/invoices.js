@@ -71,4 +71,9 @@ Handlebars.registerHelper({
 const datadir = electron.app.getPath('userData');
 const invoicePdfPath = path.join(datadir, 'invoice.pdf');
 
-module.exports = { transform, invoicePdfPath };
+module.exports = {
+  transform,
+  invoicePdfPath,
+  humanize,
+  roundToNearest15Mins,
+};

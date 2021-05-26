@@ -30,7 +30,12 @@ class App {
 
   updateStatusItemText() {
     const { name, seconds } = db.data.tasks[db.data.currentTaskIndex];
-    this.statusItem.setTitle(name, seconds);
+
+    const total = (db.data.tasks
+      .map(task => task.seconds)
+      .reduce((a, b) => a + b, 0));
+
+    this.statusItem.setTitle(name, seconds, total);
   }
 
   rebuildMenu() {
