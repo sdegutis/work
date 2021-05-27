@@ -41,7 +41,7 @@ html {
 }
 
 #settings #tasks .item {
-  padding: 0.5rem;
+  padding: 0.25rem;
   display: block;
   width: 100%;
 }
@@ -70,7 +70,7 @@ html {
   color: inherit;
   font: inherit;
   width: 3em;
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
 #settings #rate:hover {
@@ -93,7 +93,7 @@ html {
   cursor: pointer;
   color: #2af;
   font: inherit;
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
 #settings #showTemplates:hover {
