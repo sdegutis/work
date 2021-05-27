@@ -14,7 +14,7 @@ html {
   margin: 1em;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: baseline;
 }
 
@@ -24,6 +24,8 @@ html {
 
 #settings h1 {
   font-size: 100%;
+  font-weight: normal;
+  opacity: 0.5;
 }
 
 #settings ul {
