@@ -32,10 +32,7 @@ class App {
     const { name, seconds } = db.data.tasks[db.data.currentTaskIndex];
 
     const invoiceHours = (db.data.tasks
-      .map(task => {
-        console.log(task, invoices.roundToNearest15Mins(task.seconds / 60 / 60));
-        return invoices.roundToNearest15Mins(task.seconds / 60 / 60);
-      })
+      .map(task => invoices.roundToNearest15Mins(task.seconds / 60 / 60))
       .reduce((a, b) => a + b, 0))
       .toString();
 
