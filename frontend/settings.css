@@ -64,7 +64,7 @@ html {
   background-color: #258;
 }
 
-#settings #rate {
+#settings .field {
   border: none;
   outline: none;
   border: 1px solid #000;
@@ -75,15 +75,15 @@ html {
   padding: 0.25rem;
 }
 
-#settings #rate:hover {
+#settings .field:hover {
   background-color: #222;
 }
 
-#settings #rate:focus {
+#settings .field:focus {
   background-color: #258;
 }
 
-#settings #rate.invalid {
+#settings .field.invalid {
   color: red;
 }
 

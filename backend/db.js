@@ -12,6 +12,7 @@ const dataFilePath = path.join(datadir, 'data.json');
  * @property {number} currentTaskIndex
  * @property {{ name: string, seconds: number }[]} tasks
  * @property {number} rate
+ * @property {number} invoiceNumber
  */
 
 /** @type {Data} */
@@ -20,6 +21,7 @@ module.exports.data = readData() || {
   currentTaskIndex: -1,
   tasks: [],
   rate: 30,
+  invoiceNumber: 1,
 };
 
 function readData() {

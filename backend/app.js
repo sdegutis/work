@@ -148,6 +148,12 @@ class App {
           db.save();
           this.updateInvoice();
         }
+        else if (channel === 'set-invoice-number') {
+          const [invoiceNumber] = data;
+          db.data.invoiceNumber = invoiceNumber;
+          db.save();
+          this.updateInvoice();
+        }
         else if (channel === 'show-templates') {
           electron.shell.openPath(templates.templateDir);
         }
@@ -232,6 +238,7 @@ class App {
         for (const task of db.data.tasks) {
           task.seconds = 0;
         }
+        db.data.invoiceNumber++;
         db.save();
         this.updateStatusItemText();
         this.updateInvoice();

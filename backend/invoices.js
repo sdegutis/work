@@ -26,11 +26,14 @@ async function transform(data, text) {
     .map(line => line.time)
     .reduce((a, b) => a + b, 0));
 
+  const { invoiceNumber } = data;
+
   return Handlebars.compile(text)({
     ...data,
     lines,
     totalCharge,
     totalHours,
+    invoiceNumber,
   });
 }
 

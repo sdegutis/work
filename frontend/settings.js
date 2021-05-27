@@ -1,6 +1,7 @@
 const tasksEl = document.getElementById('tasks');
 const addLink = document.getElementById('add');
 const rateEl = document.getElementById('rate');
+const invoiceNumberEl = document.getElementById('invoiceNumber');
 const showTemplatesButton = document.getElementById('showTemplates');
 
 const query = new URLSearchParams(window.location.search);
@@ -71,6 +72,16 @@ rateEl.oninput = () => {
   rateEl.classList.toggle('invalid', !valid);
   if (valid) {
     main.setRate(rate);
+  }
+};
+
+invoiceNumberEl.value = data.invoiceNumber.toFixed();
+invoiceNumberEl.oninput = () => {
+  const invoiceNumber = +invoiceNumberEl.value;
+  const valid = !isNaN(invoiceNumber);
+  invoiceNumberEl.classList.toggle('invalid', !valid);
+  if (valid) {
+    main.setInvoiceNumber(invoiceNumber);
   }
 };
 
