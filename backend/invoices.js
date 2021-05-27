@@ -28,12 +28,15 @@ async function transform(data, text) {
 
   const { invoiceNumber } = data;
 
+  const date = new Date().toLocaleDateString();
+
   return Handlebars.compile(text)({
     ...data,
     lines,
     totalCharge,
     totalHours,
     invoiceNumber,
+    date,
   });
 }
 
