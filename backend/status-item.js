@@ -35,7 +35,7 @@ class StatusItem {
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
     const invoiceHours = roundToNearest15Mins(invoiceSec / 60 / 60);
-    const hoursStr = humanize(invoiceHours);
+    const hoursStr = (invoiceHours).toString();
 
     const timeColor = !this.shouldShowColor ? '' : db.data.running ? RED : YELLOW;
     const taskColor = !this.shouldShowColor ? '' : BLUE;
