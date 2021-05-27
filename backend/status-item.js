@@ -1,6 +1,5 @@
 const electron = require('electron');
 const db = require('./db');
-const { humanize, roundToNearest15Mins } = require('./invoices');
 
 const RED = '\033[31m';
 const HOURS = '\033[34m';
@@ -18,9 +17,9 @@ class StatusItem {
   /**
    * @param {string} taskName
    * @param {number} timeSec
-   * @param {number} invoiceSec
+   * @param {string} invoiceHours
    */
-  setTitle(taskName, timeSec, invoiceSec) {
+  setTitle(taskName, timeSec, invoiceHours) {
     const shortTaskName = taskName.split(/\s+/).map(([c]) => c).join('');
 
     const totalMin = Math.floor(timeSec / 60);
@@ -34,13 +33,10 @@ class StatusItem {
     const strHour = relHour.toFixed().padStart(2, '0');
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
-    const invoiceHours = roundToNearest15Mins(invoiceSec / 60 / 60);
-    const hoursStr = (invoiceHours).toString();
-
     const timeColor = !this.shouldShowColor ? '' : db.data.running ? RED : YELLOW;
     const taskColor = !this.shouldShowColor ? '' : BLUE;
     const hourColor = !this.shouldShowColor ? '' : HOURS;
-    const title = `${taskColor}(${shortTaskName}) ${timeColor}[${timeStr}] ${hourColor}{${hoursStr}}`;
+    const title = `${taskColor}(${shortTaskName}) ${timeColor}[${timeStr}] ${hourColor}{${invoiceHours}}`;
 
     if (this.lastSet !== title) {
       this.lastSet = title;

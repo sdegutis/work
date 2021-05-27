@@ -31,11 +31,15 @@ class App {
   updateStatusItemText() {
     const { name, seconds } = db.data.tasks[db.data.currentTaskIndex];
 
-    const total = (db.data.tasks
-      .map(task => task.seconds)
-      .reduce((a, b) => a + b, 0));
+    const invoiceHours = (db.data.tasks
+      .map(task => {
+        console.log(task, invoices.roundToNearest15Mins(task.seconds / 60 / 60));
+        return invoices.roundToNearest15Mins(task.seconds / 60 / 60);
+      })
+      .reduce((a, b) => a + b, 0))
+      .toString();
 
-    this.statusItem.setTitle(name, seconds, total);
+    this.statusItem.setTitle(name, seconds, invoiceHours);
   }
 
   rebuildMenu() {
