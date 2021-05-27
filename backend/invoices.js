@@ -75,11 +75,18 @@ Handlebars.registerHelper({
 });
 
 const datadir = electron.app.getPath('userData');
-const invoicePdfPath = path.join(datadir, 'invoice.pdf');
+
+/**
+ * @param {number} invoiceNum
+ */
+function getInvoicePdfPath(invoiceNum) {
+  const invoiceNumStr = invoiceNum.toFixed().padStart(3, '0');
+  return path.join(datadir, `invoice-${invoiceNumStr}.pdf`);
+}
 
 module.exports = {
   transform,
-  invoicePdfPath,
+  getInvoicePdfPath,
   humanize,
   roundToNearest15Mins,
 };

@@ -209,7 +209,9 @@ class App {
     const inputTemplate = templates.getCurrentTemplate();
 
     invoices.transform(db.data, inputTemplate).then(html => {
-      const htmlPath = path.join(invoices.invoicePdfPath, '../converted.html');
+      const invoicePdfPath = invoices.getInvoicePdfPath(db.data.invoiceNumber);
+
+      const htmlPath = path.join(invoicePdfPath, '../converted.html');
       fs.writeFileSync(htmlPath, html);
 
       this.pdfWin.loadFile(htmlPath);
@@ -219,8 +221,8 @@ class App {
           marginsType: 0,
           pageSize: 'Letter',
         }).then(buf => {
-          fs.writeFileSync(invoices.invoicePdfPath, buf);
-          this.invoiceWin?.loadFile(invoices.invoicePdfPath);
+          fs.writeFileSync(invoicePdfPath, buf);
+          this.invoiceWin?.loadFile(invoicePdfPath);
         });
       });
     });
