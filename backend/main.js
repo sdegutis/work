@@ -1,7 +1,7 @@
 const electron = require('electron');
 const App = require('./app');
 
-require('update-electron-app')();
+// require('update-electron-app')();
 
 let app;
 
