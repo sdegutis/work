@@ -1,6 +1,8 @@
 const electron = require('electron');
 const App = require('./app');
 
+require('update-electron-app')();
+
 let app;
 
 electron.app.whenReady().then(async () => {
