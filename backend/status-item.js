@@ -5,8 +5,8 @@ const COLORS = {
   light: {
     red: '\033[0;31m',
     hours: '\033[34m',
-    yellow: '\033[30;43m',
-    blue: '\033[30;46m',
+    yellow: '\033[1;33m',
+    blue: '\033[34m',
   },
   dark: {
     red: '\033[31m',
