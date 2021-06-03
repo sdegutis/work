@@ -89,5 +89,5 @@ module.exports = {
   getInvoicePdfPath,
   humanize,
   roundToNearest15Mins,
-  dollarize: dollars,
+  dollarize: money,
 };
