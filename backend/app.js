@@ -15,6 +15,10 @@ class App {
     this.rebuildMenu();
     this.updateStatusItemText();
 
+    electron.nativeTheme.addListener('updated', () => {
+      this.updateStatusItemText();
+    });
+
     if (db.data.running) {
       this.resume();
     }

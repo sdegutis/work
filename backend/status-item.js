@@ -1,10 +1,21 @@
 const electron = require('electron');
 const db = require('./db');
 
-const RED = '\033[31m';
-const HOURS = '\033[34m';
-const YELLOW = '\033[33m';
-const BLUE = '\033[36m';
+const COLORS = {
+  light: {
+    red: '\033[0;31m',
+    hours: '\033[34m',
+    yellow: '\033[30;43m',
+    blue: '\033[30;46m',
+  },
+  dark: {
+    red: '\033[31m',
+    hours: '\033[34m',
+    yellow: '\033[33m',
+    blue: '\033[36m',
+  },
+};
+
 
 class StatusItem {
 
@@ -32,9 +43,12 @@ class StatusItem {
     const strHour = relHour.toFixed().padStart(2, '0');
     const timeStr = `${strHour}:${strMin}:${strSec}`;
 
-    const timeColor = !this.shouldShowColor ? '' : db.data.running ? RED : YELLOW;
-    const taskColor = !this.shouldShowColor ? '' : BLUE;
-    const hourColor = !this.shouldShowColor ? '' : HOURS;
+    const darkMode = electron.nativeTheme.shouldUseDarkColors;
+    const { red, yellow, blue, hours } = darkMode ? COLORS.dark : COLORS.light;
+
+    const timeColor = !this.shouldShowColor ? '' : db.data.running ? red : yellow;
+    const taskColor = !this.shouldShowColor ? '' : blue;
+    const hourColor = !this.shouldShowColor ? '' : hours;
     const title = `${taskColor}(${shortTaskName}) ${timeColor}[${timeStr}]`;
 
     if (this.lastSet !== title) {
