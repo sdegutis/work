@@ -281,12 +281,12 @@ class App {
     this.rebuildMenu();
     this.updateStatusItemText();
 
-    this.timer = setInterval(this.tick.bind(this), 1000);
+    this.timer = setInterval(this.tick.bind(this), 10000);
   }
 
   tick() {
     const task = db.data.tasks[db.data.currentTaskIndex];
-    task.seconds++;
+    task.seconds += 10;
     this.updateStatusItemText();
   }
 

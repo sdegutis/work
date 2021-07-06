@@ -38,17 +38,17 @@ class StatusItem {
     const relMin = totalMin % 60;
     const relHour = Math.floor(totalMin / 60);
 
-    const strSec = relSec.toFixed().padStart(2, '0');
+    // const strSec = relSec.toFixed().padStart(2, '0');
     const strMin = relMin.toFixed().padStart(2, '0');
     const strHour = relHour.toFixed().padStart(2, '0');
-    const timeStr = `${strHour}:${strMin}:${strSec}`;
+    const timeStr = `${strHour}:${strMin}`;
 
     const darkMode = electron.nativeTheme.shouldUseDarkColors;
     const { red, yellow, blue, hours } = darkMode ? COLORS.dark : COLORS.light;
 
     const timeColor = !this.shouldShowColor ? '' : db.data.running ? red : yellow;
     const taskColor = !this.shouldShowColor ? '' : blue;
-    const hourColor = !this.shouldShowColor ? '' : hours;
+    // const hourColor = !this.shouldShowColor ? '' : hours;
     const title = `${taskColor}(${shortTaskName}) ${timeColor}[${timeStr}]`;
 
     if (this.lastSet !== title) {
