@@ -7,6 +7,8 @@ const templates = require('./templates');
 const invoices = require('./invoices');
 const chokidar = require('chokidar');
 
+const IDLE_NOT_WORKING_THRESHOLD_SEC = 5 * 60;
+
 class App {
 
   constructor() {
@@ -285,8 +287,21 @@ class App {
   }
 
   tick() {
+    if (electron.powerMonitor.getSystemIdleTime() < IDLE_NOT_WORKING_THRESHOLD_SEC) {
+      this.adjustCurrentTaskBy(10);
+    }
+    else {
+      this.adjustCurrentTaskBy(-IDLE_NOT_WORKING_THRESHOLD_SEC);
+      this.pause();
+    }
+  }
+
+  /**
+   * @param {number} seconds to add
+   */
+  adjustCurrentTaskBy(seconds) {
     const task = db.data.tasks[db.data.currentTaskIndex];
-    task.seconds += 10;
+    task.seconds += seconds;
     this.updateStatusItemText();
   }
 
