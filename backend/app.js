@@ -35,7 +35,7 @@ class App {
   }
 
   updateStatusItemText() {
-    const { name, seconds } = this.getCurrentTask();
+    const { name, seconds } = db.data.tasks[db.data.currentTaskIndex];
 
     this.statusItem.setTitle(name, seconds);
 
@@ -288,27 +288,21 @@ class App {
 
   tick() {
     if (electron.powerMonitor.getSystemIdleTime() < IDLE_NOT_WORKING_THRESHOLD_SEC) {
-      this.addTimeToCurrentTask(10);
+      this.adjustCurrentTaskBy(10);
     }
     else {
-      this.addTimeToCurrentTask(-IDLE_NOT_WORKING_THRESHOLD_SEC);
-      const task = this.getCurrentTask();
-      if (task.seconds < 0) task.seconds = 0;
+      this.adjustCurrentTaskBy(-IDLE_NOT_WORKING_THRESHOLD_SEC);
       this.pause();
     }
   }
 
   /**
-   * @param {number} seconds
+   * @param {number} seconds to add
    */
-  addTimeToCurrentTask(seconds) {
-    const task = this.getCurrentTask();
+  adjustCurrentTaskBy(seconds) {
+    const task = db.data.tasks[db.data.currentTaskIndex];
     task.seconds += seconds;
     this.updateStatusItemText();
-  }
-
-  getCurrentTask() {
-    return db.data.tasks[db.data.currentTaskIndex];
   }
 
 }
