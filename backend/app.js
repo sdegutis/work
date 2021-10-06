@@ -45,7 +45,7 @@ class App {
 
     const totalCharge = invoices.dollarize(db.data.rate * invoiceHours);
 
-    // this.statusItem.tray.setToolTip(`Hours: ${invoiceHours}\nCharge: ${totalCharge}`);
+    this.statusItem.tray.setToolTip(`Hours: ${invoiceHours}\nCharge: ${totalCharge}`);
   }
 
   rebuildMenu() {
@@ -90,7 +90,7 @@ class App {
       this.updateStatusItemText();
     });
 
-    // this.statusItem.tray.setContextMenu(menu);
+    this.statusItem.tray.setContextMenu(menu);
   }
 
   manageTasks() {
@@ -99,8 +99,6 @@ class App {
       this.manageTasksWin.focus();
     }
     else {
-      electron.app.dock.show();
-
       const win = new electron.BrowserWindow({
         width: 350,
         height: 350,
@@ -118,9 +116,6 @@ class App {
       this.manageTasksWin = win;
       win.on('closed', () => {
         delete this.manageTasksWin;
-        if (!this.manageTasksWin && !this.invoiceWin) {
-          electron.app.dock.hide();
-        }
       });
 
       win.loadFile('frontend/settings.html', {
@@ -192,8 +187,6 @@ class App {
       }
     }
     else {
-      electron.app.dock.show();
-
       const win = new electron.BrowserWindow({
         width: 450,
         height: 675,
@@ -209,9 +202,6 @@ class App {
       win.on('closed', () => {
         watcher.close();
         delete this.invoiceWin;
-        if (!this.manageTasksWin && !this.invoiceWin) {
-          electron.app.dock.hide();
-        }
       });
     }
 

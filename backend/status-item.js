@@ -1,5 +1,6 @@
 const electron = require('electron');
 const db = require('./db');
+const path = require('path');
 
 const COLORS = {
   light: {
@@ -20,7 +21,9 @@ const COLORS = {
 class StatusItem {
 
   constructor() {
-    // this.tray = new electron.Tray(electron.nativeImage.createEmpty());
+    const imagePath = path.join(__dirname, '../tray.png');
+    const icon = electron.nativeImage.createFromPath(imagePath);
+    this.tray = new electron.Tray(icon);
     this.lastSet = '';
     this.shouldShowColor = true;
   }
@@ -53,7 +56,7 @@ class StatusItem {
 
     if (this.lastSet !== title) {
       this.lastSet = title;
-      // this.tray.setTitle(title);
+      this.tray.setTitle(title);
     }
   }
 
