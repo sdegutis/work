@@ -24,6 +24,7 @@ class StatusItem {
     const imagePath = path.join(__dirname, '../tray.png');
     const icon = electron.nativeImage.createFromPath(imagePath);
     this.tray = new electron.Tray(icon);
+    this.tray.on('click', () => this.tray.popUpContextMenu());
     this.lastSet = '';
   }
 
