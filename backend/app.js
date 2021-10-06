@@ -45,7 +45,7 @@ class App {
 
     const totalCharge = invoices.dollarize(db.data.rate * invoiceHours);
 
-    this.statusItem.tray.setToolTip(`Hours: ${invoiceHours}\nCharge: ${totalCharge}`);
+    // this.statusItem.tray.setToolTip(`Hours: ${invoiceHours}\nCharge: ${totalCharge}`);
   }
 
   rebuildMenu() {
@@ -90,7 +90,7 @@ class App {
       this.updateStatusItemText();
     });
 
-    this.statusItem.tray.setContextMenu(menu);
+    // this.statusItem.tray.setContextMenu(menu);
   }
 
   manageTasks() {

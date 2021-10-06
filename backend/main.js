@@ -7,7 +7,7 @@ let app;
 
 electron.app.whenReady().then(async () => {
 
-  electron.app.dock.hide();
+  // electron.app.dock.hide();
 
   app = new App();
 

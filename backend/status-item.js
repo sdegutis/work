@@ -20,7 +20,7 @@ const COLORS = {
 class StatusItem {
 
   constructor() {
-    this.tray = new electron.Tray(electron.nativeImage.createEmpty());
+    // this.tray = new electron.Tray(electron.nativeImage.createEmpty());
     this.lastSet = '';
     this.shouldShowColor = true;
   }
@@ -53,7 +53,7 @@ class StatusItem {
 
     if (this.lastSet !== title) {
       this.lastSet = title;
-      this.tray.setTitle(title);
+      // this.tray.setTitle(title);
     }
   }
 
