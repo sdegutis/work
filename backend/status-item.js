@@ -54,10 +54,7 @@ class StatusItem {
     // const hourColor = !this.shouldShowColor ? '' : hours;
     const title = `${taskColor}(${shortTaskName}) ${timeColor}[${timeStr}]`;
 
-    if (this.lastSet !== title) {
-      this.lastSet = title;
-      this.tray.setTitle(title);
-    }
+    return title;
   }
 
 }

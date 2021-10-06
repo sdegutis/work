@@ -37,7 +37,7 @@ class App {
   updateStatusItemText() {
     const { name, seconds } = db.data.tasks[db.data.currentTaskIndex];
 
-    this.statusItem.setTitle(name, seconds);
+    const title = this.statusItem.setTitle(name, seconds);
 
     const invoiceHours = (db.data.tasks
       .map(task => invoices.roundToNearest15Mins(task.seconds / 60 / 60))
@@ -45,7 +45,7 @@ class App {
 
     const totalCharge = invoices.dollarize(db.data.rate * invoiceHours);
 
-    this.statusItem.tray.setToolTip(`Hours: ${invoiceHours}\nCharge: ${totalCharge}`);
+    this.statusItem.tray.setToolTip(`${title}\n\nHours: ${invoiceHours}\nCharge: ${totalCharge}`);
   }
 
   rebuildMenu() {
