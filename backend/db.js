@@ -18,8 +18,10 @@ const dataFilePath = path.join(datadir, 'data.json');
 /** @type {Data} */
 module.exports.data = readData() || {
   running: false,
-  currentTaskIndex: -1,
-  tasks: [],
+  currentTaskIndex: 0,
+  tasks: [
+    { name: "Stuff", seconds: 0 }
+  ],
   rate: 30,
   invoiceNumber: 1,
 };
