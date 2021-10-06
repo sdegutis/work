@@ -81,12 +81,10 @@ class App {
     ]);
 
     menu.on('menu-will-show', () => {
-      this.statusItem.shouldShowColor = false;
       this.updateStatusItemText();
     });
 
     menu.on('menu-will-close', () => {
-      this.statusItem.shouldShowColor = true;
       this.updateStatusItemText();
     });
 

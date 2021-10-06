@@ -25,7 +25,6 @@ class StatusItem {
     const icon = electron.nativeImage.createFromPath(imagePath);
     this.tray = new electron.Tray(icon);
     this.lastSet = '';
-    this.shouldShowColor = true;
   }
 
   /**
@@ -49,11 +48,7 @@ class StatusItem {
     const darkMode = electron.nativeTheme.shouldUseDarkColors;
     const { red, yellow, blue, hours } = darkMode ? COLORS.dark : COLORS.light;
 
-    const timeColor = !this.shouldShowColor ? '' : db.data.running ? red : yellow;
-    const taskColor = !this.shouldShowColor ? '' : blue;
-    // const hourColor = !this.shouldShowColor ? '' : hours;
-    const title = `${taskColor}(${shortTaskName}) ${timeColor}[${timeStr}]`;
-
+    const title = `(${shortTaskName})\n[${timeStr}]`;
     return title;
   }
 
