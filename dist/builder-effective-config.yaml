@@ -1,0 +1,7 @@
+directories:
+  output: dist
+  buildResources: build
+appId: org.degutis.work
+productName: Work
+files: []
+electronVersion: 15.1.1

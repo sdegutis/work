@@ -2,29 +2,33 @@
   "name": "work",
   "productName": "Work",
   "version": "1.4.2",
-  "description": "",
+  "description": "Multi-Task Stopwatch & Invoice Generator",
   "main": "backend/main.js",
   "repository": {
     "url": "https://github.com/sdegutis/work"
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . Work --out out",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder --windows",
+    "release": "electron-builder --windows --publish always"
   },
   "keywords": [],
-  "author": "",
+  "author": "Steven Degutis",
   "license": "ISC",
   "devDependencies": {
     "electron": "^15.1.1",
-    "electron-packager": "^15.4.0"
+    "electron-builder": "^22.11.7"
   },
   "dependencies": {
     "chokidar": "^3.5.1",
-    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^4.3.9",
     "fs-extra": "^10.0.0",
     "handlebars": "^4.7.7",
-    "update-electron-app": "^2.0.1",
     "write-file-atomic": "^3.0.3"
+  },
+  "build": {
+    "appId": "org.degutis.work",
+    "productName": "Work"
   }
 }
