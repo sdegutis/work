@@ -118,6 +118,7 @@ class App {
       win.on('closed', () => {
         delete this.manageTasksWin;
       });
+      win.setMenu(null);
 
       win.loadFile('frontend/settings.html', {
         query: { data: JSON.stringify(db.data) },
@@ -192,6 +193,7 @@ class App {
         width: 450,
         height: 675,
       });
+      win.setMenu(null);
 
       const watcher = chokidar.watch(templates.currentTemplatePath, {
         ignoreInitial: true,
