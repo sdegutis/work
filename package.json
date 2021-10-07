@@ -30,5 +30,8 @@
   "build": {
     "appId": "org.degutis.work",
     "productName": "Work"
+  },
+  "publish": {
+    "releaseType": "release"
   }
 }
