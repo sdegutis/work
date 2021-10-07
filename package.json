@@ -1,7 +1,7 @@
 {
   "name": "work",
   "productName": "Work",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Multi-Task Stopwatch & Invoice Generator",
   "main": "backend/main.js",
   "repository": {
