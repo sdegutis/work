@@ -38,6 +38,7 @@ class App {
     const { name, seconds } = db.data.tasks[db.data.currentTaskIndex];
 
     const title = this.statusItem.setTitle(name, seconds);
+    this.statusItem.setImage();
 
     const invoiceHours = (db.data.tasks
       .map(task => invoices.roundToNearest15Mins(task.seconds / 60 / 60))

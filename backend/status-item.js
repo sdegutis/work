@@ -21,11 +21,16 @@ const COLORS = {
 class StatusItem {
 
   constructor() {
-    const imagePath = path.join(__dirname, '../tray.png');
-    const icon = electron.nativeImage.createFromPath(imagePath);
-    this.tray = new electron.Tray(icon);
+    this.iconOff = electron.nativeImage.createFromPath(path.join(__dirname, '../tray.png'));
+    this.iconOn = electron.nativeImage.createFromPath(path.join(__dirname, '../tray-on.png'));
+    this.tray = new electron.Tray(this.iconOff);
     this.tray.on('click', () => this.tray.popUpContextMenu());
     this.lastSet = '';
+  }
+
+  setImage() {
+    const running = db.data.running;
+    this.tray.setImage(running ? this.iconOn : this.iconOff);
   }
 
   /**
