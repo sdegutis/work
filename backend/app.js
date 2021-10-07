@@ -14,6 +14,8 @@ class App {
   constructor() {
     this.statusItem = new StatusItem();
 
+    this.statusItem.tray.on('click', () => db.data.running ? this.pause() : this.resume());
+
     this.rebuildMenu();
     this.updateStatusItemText();
 
