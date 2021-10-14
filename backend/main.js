@@ -1,19 +1,23 @@
 const electron = require('electron');
-const App = require('./app');
-const { autoUpdater } = require("electron-updater");
 
 let app;
 
 const mainInstance = electron.app.requestSingleInstanceLock();
-if (!mainInstance) electron.app.quit();
+if (mainInstance) {
+  const App = require('./app');
+  const { autoUpdater } = require("electron-updater");
 
-electron.app.whenReady().then(async () => {
-  autoUpdater.checkForUpdatesAndNotify();
+  electron.app.whenReady().then(async () => {
+    autoUpdater.checkForUpdatesAndNotify();
 
-  app = new App();
+    app = new App();
 
-  electron.app.on('window-all-closed', (/** @type {electron.Event} */ e) => {
-    e.preventDefault();
+    electron.app.on('window-all-closed', (/** @type {electron.Event} */ e) => {
+      e.preventDefault();
+    });
+
   });
-
-});
+}
+else {
+  electron.app.quit();
+}
