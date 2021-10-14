@@ -37,8 +37,6 @@ class StatusItem {
    * @param {number} timeSec
    */
   setTitle(taskName, timeSec) {
-    const shortTaskName = taskName.split(/\s+/).map(([c]) => c).join('');
-
     const totalMin = Math.floor(timeSec / 60);
 
     const relSec = timeSec % 60;
@@ -53,7 +51,7 @@ class StatusItem {
     const darkMode = electron.nativeTheme.shouldUseDarkColors;
     const { red, yellow, blue, hours } = darkMode ? COLORS.dark : COLORS.light;
 
-    const title = `(${shortTaskName})\n[${timeStr}]`;
+    const title = `(${taskName})\n[${timeStr}]`;
     return title;
   }
 
