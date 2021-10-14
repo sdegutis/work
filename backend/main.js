@@ -4,6 +4,9 @@ const { autoUpdater } = require("electron-updater");
 
 let app;
 
+const mainInstance = electron.app.requestSingleInstanceLock();
+if (!mainInstance) electron.app.quit();
+
 electron.app.whenReady().then(async () => {
   autoUpdater.checkForUpdatesAndNotify();
 
