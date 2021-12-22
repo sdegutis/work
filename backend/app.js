@@ -12,6 +12,8 @@ const IDLE_NOT_WORKING_THRESHOLD_SEC = 5 * 60;
 class App {
 
   constructor() {
+    if (process.platform === 'win32') electron.app.setAppUserModelId(electron.app.name);
+
     this.statusItem = new StatusItem();
 
     this.statusItem.tray.on('click', () => db.data.running ? this.pause() : this.resume());
@@ -286,6 +288,15 @@ class App {
     else {
       this.adjustCurrentTaskBy(-IDLE_NOT_WORKING_THRESHOLD_SEC);
       this.pause();
+      const note = new electron.Notification({
+        timeoutType: 'never',
+        title: 'Work timer has been paused',
+        body: 'You were idle so it was paused. Do you want to unpause it?',
+      });
+      note.once('click', (e) => {
+        this.resume();
+      });
+      note.show();
     }
   }
 
