@@ -7,8 +7,6 @@ const templates = require('./templates');
 const invoices = require('./invoices');
 const chokidar = require('chokidar');
 
-const IDLE_NOT_WORKING_THRESHOLD_SEC = 5 * 60;
-
 class App {
 
   constructor() {
@@ -282,22 +280,7 @@ class App {
   }
 
   tick() {
-    if (electron.powerMonitor.getSystemIdleTime() < IDLE_NOT_WORKING_THRESHOLD_SEC) {
-      this.adjustCurrentTaskBy(10);
-    }
-    else {
-      this.adjustCurrentTaskBy(-IDLE_NOT_WORKING_THRESHOLD_SEC);
-      this.pause();
-      const note = new electron.Notification({
-        timeoutType: 'never',
-        title: 'Work timer has been paused',
-        body: 'You were idle so it was paused. Do you want to unpause it?',
-      });
-      note.once('click', (e) => {
-        this.resume();
-      });
-      note.show();
-    }
+    this.adjustCurrentTaskBy(10);
   }
 
   /**
