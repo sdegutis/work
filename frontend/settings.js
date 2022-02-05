@@ -65,7 +65,7 @@ showTemplatesButton.onclick = (e) => {
   main.showTemplates();
 };
 
-rateEl.value = data.rate.toFixed();
+rateEl.value = data.rate;
 rateEl.oninput = () => {
   const rate = +rateEl.value;
   const valid = !isNaN(rate);
