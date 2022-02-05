@@ -52,6 +52,7 @@ const humanize = (/** @type {number} */ time) => {
 const MONEY_FORMATTER = new Intl.NumberFormat('en-EN', {
   style: 'currency',
   currency: 'USD',
+  maximumFractionDigits: 5,
 });
 
 const DOLLARS_FORMATTER = new Intl.NumberFormat('en-EN', {
